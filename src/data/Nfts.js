@@ -1,27 +1,27 @@
 // src/data/products.js
-const products = [
+const Nfts = [
     {
         id: '1',
         name: 'Abstract Art NFT',
         description: 'A unique piece of abstract digital art.',
         price: 100,
-        imageUrl: '/images/pin.jpg'
+        imageUrl: '/images/Nft3.png'
     },
     {
         id: '2',
-        name: 'Landscape Pin',
-        description: 'A beautiful landscape pin.',
-        price: 20,
-        imageUrl: '/images/pin.jpg'
+        name: '3D: Goons Club',
+        description: 'The land of TMRW',
+        price: 150,
+        imageUrl: '/images/Nft2.jpg'
     },
     {
         id: '3',
         name: 'Abstract Art NFT',
         description: 'A unique piece of abstract digital art.',
         price: 100,
-        imageUrl: '/images/pin.jpg'
+        imageUrl: '/images/Nft1.png'
     },
     
 ];
 
-export default products;
+export default Nfts;

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
+import NftList from './components/NftList'; // Import NftList
 import Cart from './components/Cart';
 import Footer from './components/Footer';
-import Videos from './components/Videos'; // Import the Videos component
 import products from './data/products';
 import './App.css';
 
@@ -33,9 +33,9 @@ function App() {
                 onClick={toggleCart}
                 style={{
                     position: 'fixed',
-                    zIndex: 105,  // Ensure the button is above the cart
+                    zIndex: 105,
                     top: '10px',
-                    right: cartVisible ? '330px' : '10px', // Adjust position based on cart visibility
+                    right: cartVisible ? '330px' : '10px',
                 }}
             >
                 {cartVisible ? 'Hide Cart' : 'Show Cart'}
@@ -43,7 +43,7 @@ function App() {
             {cartVisible && <Cart items={cartItems} removeFromCart={removeFromCart} />}
             <HeroSection />
             <ProductList products={products} addToCart={addToCart} />
-            <Videos /> {/* Add the Videos component to the render */}
+            <NftList /> {/* Display the NFT list */}
             <Footer />
         </div>
     );
