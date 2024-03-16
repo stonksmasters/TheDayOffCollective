@@ -188,3 +188,59 @@ button:hover {
 .video:hover p {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+/* Add to src/App.css */
+.footer {
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.footer-section {
+  margin: 10px;
+}
+
+.footer-section h4 {
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  display: flex;
+  list-style: none;
+}
+
+.social-icons a {
+  margin-right: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #007bff;
+}
+/* Add to src/App.css */
+.social-icons a {
+  color: white;
+  margin: 0 10px;
+  font-size: 24px; /* Adjust the size as needed */
+}
+
+.social-icons a:hover {
+  color: #007bff; /* Change hover color as needed */
+}
+
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  border-top: 1px solid #4f4f4f;
+  padding-top: 10px;
+}

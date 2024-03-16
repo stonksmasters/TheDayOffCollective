@@ -4,16 +4,27 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer className="footer">
-            <p>&copy; 2024 Art & Pins Store. All rights reserved.</p>
-            <div>
-                <a href="/terms">Terms of Service</a> | 
-                <a href="/privacy">Privacy Policy</a>
+            <div className="footer-content">
+                <div className="footer-section">
+                    <h4>About Us</h4>
+                    <p>Art & Pins Store is a leading provider of unique NFT art and collectible pins.</p>
+                </div>
+                <div className="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>Email: contact@artpinsstore.com</p>
+                    <p>Phone: +123 456 7890</p>
+                </div>
+                <div className="footer-section">
+                    <h4>Follow Us</h4>
+                    <div className="social-icons">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+                    </div>
+                </div>
             </div>
-            <div>
-                Follow us on 
-                <a href="http://facebook.com"> Facebook</a>,
-                <a href="http://twitter.com"> Twitter</a>, and
-                <a href="http://instagram.com"> Instagram</a>
+            <div className="footer-bottom">
+                &copy; {new Date().getFullYear()} Art & Pins Store. All rights reserved.
             </div>
         </footer>
     );

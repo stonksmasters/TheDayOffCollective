@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
 import NftList from './components/NftList'; // Import NftList
+import Videos from './components/Videos'
 import Cart from './components/Cart';
 import Footer from './components/Footer';
 import products from './data/products';
@@ -44,6 +45,7 @@ function App() {
             <HeroSection />
             <ProductList products={products} addToCart={addToCart} />
             <NftList /> {/* Display the NFT list */}
+            <Videos />
             <Footer />
         </div>
     );
