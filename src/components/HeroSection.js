@@ -5,7 +5,8 @@ const images = [
   '/images/Nft1.png',
   '/images/Nft2.jpg',
   '/images/Nft3.png',
-  '/images/Friend.jpg'
+  '/images/Friend.jpg',
+  '/images/Kota.png'
 ];
 
 const HeroSection = () => {
