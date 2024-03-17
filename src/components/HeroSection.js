@@ -4,7 +4,8 @@ import React, { useState, useEffect } from 'react';
 const images = [
   '/images/Nft1.png',
   '/images/Nft2.jpg',
-  '/images/Nft3.png'
+  '/images/Nft3.png',
+  '/images/Friend.jpg'
 ];
 
 const HeroSection = () => {
