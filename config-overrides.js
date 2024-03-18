@@ -14,7 +14,8 @@ module.exports = function override(config, env) {
         https: require.resolve('https-browserify'),
         http: require.resolve('stream-http'),
         zlib: require.resolve('browserify-zlib'),
-        assert: require.resolve('assert')
+        assert: require.resolve('assert'),
+        vm: require.resolve('vm-browserify')  // Add this line for vm polyfill
     };
 
     // Plugin to provide global variables (needed for some browserify packages)
