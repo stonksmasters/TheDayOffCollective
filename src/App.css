@@ -5,12 +5,14 @@ body {
   padding: 0;
   background-color: #fafafa;
   color: #333;
+  overflow-x: hidden; /* Ensure no horizontal scroll */
 }
 
 .App {
   max-width: 1200px;
   margin: auto;
   padding: 20px;
+  position: relative; /* Added for z-index context */
 }
 
 .product-list {
@@ -46,7 +48,6 @@ body {
   color: #007bff;
 }
 
-/* Add to src/App.css */
 .cart {
   position: fixed;
   right: 20px;
@@ -54,13 +55,12 @@ body {
   width: 300px;
   max-height: 90vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.95); /* semi-transparent white */
+  background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* high enough to be on top */
+  z-index: 1; /* Ensure it is high enough to float above other content */
   padding: 10px;
   border-radius: 5px;
 }
-
 
 button {
   background-color: #007bff;
@@ -105,7 +105,6 @@ button:hover {
   color: #007bff;
 }
 
-/* Add to src/App.css */
 .hero-section {
   height: 100vh;
   background-size: cover;
@@ -123,7 +122,7 @@ button:hover {
   padding: 20px;
   border-radius: 10px;
 }
-/* Add to src/App.css */
+
 .toggle-cart-button {
   background-color: #007bff;
   color: white;
@@ -131,15 +130,16 @@ button:hover {
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  position: fixed; /* Make sure it's visible and accessible */
+  right: 20px; /* Adjust as necessary */
+  top: 100px; /* Adjust as necessary */
+  z-index: 2; /* Above the cart */
 }
 
 .toggle-cart-button:hover {
   background-color: #0056b3;
 }
 
-
-/* Add to src/App.css */
-/* Add to src/App.css */
 .video-container {
   display: flex;
   flex-wrap: wrap;
@@ -189,7 +189,6 @@ button:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Add to src/App.css */
 .footer {
   background-color: #333;
   color: white;
@@ -226,17 +225,6 @@ button:hover {
 .social-icons a:hover {
   color: #007bff;
 }
-/* Add to src/App.css */
-.social-icons a {
-  color: white;
-  margin: 0 10px;
-  font-size: 24px; /* Adjust the size as needed */
-}
-
-.social-icons a:hover {
-  color: #007bff; /* Change hover color as needed */
-}
-
 
 .footer-bottom {
   text-align: center;
