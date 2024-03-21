@@ -12,9 +12,7 @@ import './App.css';
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
-    const resetCart = () => {
-        setCartItems([]);  // Assuming you have a setCartItems state setter in your parent component
-    };
+
     
 
     const addToCart = (product) => {

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ShippingForm from './ShippingForm';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { sendTransaction } from './solanaTransactions';
-import { resetCart } from '../App'
+
 
 const Cart = ({ items, removeFromCart, resetCart }) => {
     const [showShippingForm, setShowShippingForm] = useState(true);
