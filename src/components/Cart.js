@@ -4,19 +4,21 @@ import ShippingForm from './ShippingForm';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { sendTransaction } from './solanaTransactions';
 
-
 const Cart = ({ items, removeFromCart, resetCart }) => {
     const [showShippingForm, setShowShippingForm] = useState(true);
+    const [isReadyForCheckout, setIsReadyForCheckout] = useState(false); // New state to track checkout readiness
     const wallet = useWallet();
 
     const handleShippingSubmit = (data) => {
         console.log('Shipping Data:', data);
-        setShowShippingForm(false); // Proceed to checkout view
+        setShowShippingForm(false); // Hide the shipping form
+        setIsReadyForCheckout(true); // Set ready for checkout after form submission
     };
 
     const handleCancel = () => {
-        resetCart(); // Reset the cart through the prop function
-        setShowShippingForm(true); // Show the shipping form again for new transactions
+        resetCart();
+        setShowShippingForm(true);
+        setIsReadyForCheckout(false); // Reset checkout readiness on cancel
     };
 
     const checkout = async () => {
@@ -28,13 +30,14 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
             try {
                 const transactionSignature = await sendTransaction(wallet, totalAmount, items);
                 console.log(`[Cart] Transaction successful: ${transactionSignature}`);
-                resetCart(); // Clear the cart after successful checkout
-                setShowShippingForm(true); // Reset the view to initial state
+                resetCart();
+                setShowShippingForm(true);
+                setIsReadyForCheckout(false); // Reset checkout readiness after successful checkout
             } catch (error) {
                 console.error("[Cart] Transaction failed:", error);
             }
         } else {
-            console.log("[Cart] Wallet not connected, cart is empty");
+            console.log("[Cart] Wallet not connected or cart is empty");
         }
     };
 
@@ -48,14 +51,12 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                     <button onClick={() => removeFromCart(item.id)}>Remove</button>
                 </div>
             ))}
-            {showShippingForm ? (
+            {showShippingForm && (
+                <ShippingForm onFormSubmit={handleShippingSubmit} />
+            )}
+            {isReadyForCheckout && (
                 <>
-                    <ShippingForm onFormSubmit={handleShippingSubmit} />
-                    <button onClick={handleCancel}>Cancel</button>
-                </>
-            ) : (
-                <>
-                    <button onClick={checkout} disabled={!wallet.connected || items.length === 0}>
+                    <button onClick={checkout} disabled={!wallet.connected}>
                         Confirm Checkout
                     </button>
                     <button onClick={handleCancel}>Cancel</button>
