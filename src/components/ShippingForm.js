@@ -1,18 +1,15 @@
 import React from 'react';
 
-const ShippingForm = () => {
+const ShippingForm = ({ onFormSubmit }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
-        const form = event.target;
-        const formData = new FormData(form);
+        const formData = new FormData(event.target);
+        const shippingData = Object.fromEntries(formData.entries());
 
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString(),
-        })
-        .then(() => console.log("Form successfully submitted"))
-        .catch((error) => alert(error));
+        console.log('Form Data:', shippingData);
+
+        // Call the onFormSubmit function passed as a prop to notify the parent component
+        onFormSubmit(shippingData);
     };
 
     return (

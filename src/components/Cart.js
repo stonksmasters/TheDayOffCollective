@@ -1,41 +1,40 @@
 // src/components/Cart.js
 import React, { useState } from 'react';
 import ShippingForm from './ShippingForm';
-import ReviewOrder from './ReviewOrder';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { sendTransaction } from './solanaTransactions';
+import { resetCart } from '../App'
 
 const Cart = ({ items, removeFromCart, resetCart }) => {
     const [showShippingForm, setShowShippingForm] = useState(true);
-    const [showReview, setShowReview] = useState(false);
-    const [shippingData, setShippingData] = useState(null);
     const wallet = useWallet();
 
     const handleShippingSubmit = (data) => {
-        setShippingData(data);
-        setShowShippingForm(false);
-        setShowReview(true);
+        console.log('Shipping Data:', data);
+        setShowShippingForm(false); // Proceed to checkout view
     };
 
-    const handleReviewConfirm = async () => {
-        setShowReview(false);
-        await checkout();
+    const handleCancel = () => {
+        resetCart(); // Reset the cart through the prop function
+        setShowShippingForm(true); // Show the shipping form again for new transactions
     };
 
     const checkout = async () => {
-        if (wallet.connected && items.length > 0 && shippingData) {
+        console.log("[Cart] Checkout initiated");
+        if (wallet.connected && items.length > 0) {
             const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
+            console.log(`[Cart] Total amount for checkout: ${totalAmount} SOL`);
 
             try {
                 const transactionSignature = await sendTransaction(wallet, totalAmount, items);
                 console.log(`[Cart] Transaction successful: ${transactionSignature}`);
-                resetCart();  // Reset the cart in the parent component
-                setShowShippingForm(true); // Reset the local state to show the shipping form again
+                resetCart(); // Clear the cart after successful checkout
+                setShowShippingForm(true); // Reset the view to initial state
             } catch (error) {
                 console.error("[Cart] Transaction failed:", error);
             }
         } else {
-            console.log("[Cart] Wallet not connected, cart is empty, or shipping data is missing");
+            console.log("[Cart] Wallet not connected, cart is empty");
         }
     };
 
@@ -49,8 +48,19 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                     <button onClick={() => removeFromCart(item.id)}>Remove</button>
                 </div>
             ))}
-            {showShippingForm && <ShippingForm onFormSubmit={handleShippingSubmit} />}
-            {showReview && <ReviewOrder items={items} onConfirm={handleReviewConfirm} onCancel={() => setShowReview(false)} />}
+            {showShippingForm ? (
+                <>
+                    <ShippingForm onFormSubmit={handleShippingSubmit} />
+                    <button onClick={handleCancel}>Cancel</button>
+                </>
+            ) : (
+                <>
+                    <button onClick={checkout} disabled={!wallet.connected || items.length === 0}>
+                        Confirm Checkout
+                    </button>
+                    <button onClick={handleCancel}>Cancel</button>
+                </>
+            )}
         </div>
     );
 };
