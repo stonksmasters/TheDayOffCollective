@@ -1,32 +1,40 @@
 import React from 'react';
 
-const ShippingForm = ({ onFormSubmit }) => {
+const ShippingForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        const shippingData = Object.fromEntries(formData.entries());
-        onFormSubmit(shippingData); // Pass the shipping data back to the parent component
+        const form = event.target;
+        const formData = new FormData(form);
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => console.log("Form successfully submitted"))
+        .catch((error) => alert(error));
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+            <input type="hidden" name="form-name" value="shipping" />
             <p>
-                <label>Name <input type="text" name="name" required /></label>
+                <label>Name: <input type="text" name="name" required /></label>
             </p>
             <p>
-                <label>Email <input type="email" name="email" required /></label>
+                <label>Email: <input type="email" name="email" required /></label>
             </p>
             <p>
-                <label>Address <textarea name="address" required /></label>
+                <label>Address: <textarea name="address" required /></label>
             </p>
             <p>
-                <label>City <input type="text" name="city" required /></label>
+                <label>City: <input type="text" name="city" required /></label>
             </p>
             <p>
-                <label>State <input type="text" name="state" required /></label>
+                <label>State: <input type="text" name="state" required /></label>
             </p>
             <p>
-                <label>Zip Code <input type="text" name="zipcode" required /></label>
+                <label>Zip Code: <input type="text" name="zipcode" required /></label>
             </p>
             <p>
                 <button type="submit">Proceed to Checkout</button>
