@@ -9,7 +9,7 @@ export const sendTransaction = async (wallet, amount, cartItems) => {
 
         console.log("[SolanaTransactions] Connection established to mainnet-beta using Alchemy.");
 
-        const receiverAddress = new PublicKey('dovP29ni96gmfecU6YmiZhY84pvh4HMr2ADuxL4mkUu');
+        const receiverAddress = new PublicKey('HeGffZqFhB9euhind4aJFWy8waLCppTkie4gvW8bQhzp');
         console.log(`[SolanaTransactions] Receiver address: ${receiverAddress.toString()}`);
 
         const lamports = amount * LAMPORTS_PER_SOL;
