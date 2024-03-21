@@ -1,12 +1,14 @@
 // src/solanaTransactions.js
-import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, clusterApiUrl } from '@solana/web3.js';
+import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } from '@solana/web3.js';
 
 export const sendTransaction = async (wallet, amount, cartItems) => {
     try {
-        const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
-        console.log("[SolanaTransactions] Connection established to devnet.");
+        // Using Alchemy's Solana mainnet endpoint
+        const ALCHEMY_ENDPOINT = "https://solana-mainnet.g.alchemy.com/v2/7VqGQlnQ0MGxXUj4dOdEKjr7v-Q6r5DZ";
+        const connection = new Connection(ALCHEMY_ENDPOINT, 'confirmed');
 
-        // Ensure the wallet address is correctly formatted and not enclosed in angle brackets
+        console.log("[SolanaTransactions] Connection established to mainnet-beta using Alchemy.");
+
         const receiverAddress = new PublicKey('dovP29ni96gmfecU6YmiZhY84pvh4HMr2ADuxL4mkUu');
         console.log(`[SolanaTransactions] Receiver address: ${receiverAddress.toString()}`);
 

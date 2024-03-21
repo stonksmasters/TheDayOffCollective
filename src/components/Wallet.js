@@ -4,9 +4,10 @@ import { ConnectionProvider, WalletProvider, useWallet } from '@solana/wallet-ad
 import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
-import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'; // Correct import for WalletAdapterNetwork
 
 require('@solana/wallet-adapter-react-ui/styles.css');
+
 
 const WalletStatusChecker = () => {
     const wallet = useWallet();
@@ -24,12 +25,12 @@ const WalletStatusChecker = () => {
 const Wallet = ({ children }) => {
     console.log("[Wallet] Component rendering...");
 
-    const network = WalletAdapterNetwork.Devnet;
+    const network = WalletAdapterNetwork.Mainnet;
     const endpoint = useMemo(() => {
         console.log(`[Wallet] Network set to: ${network}`);
         return clusterApiUrl(network);
     }, [network]);
-    
+
     console.log(`[Wallet] Endpoint set to: ${endpoint}`);
 
     const wallets = useMemo(() => {
