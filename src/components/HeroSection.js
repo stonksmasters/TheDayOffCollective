@@ -24,8 +24,8 @@ const HeroSection = () => {
   return (
     <div className="hero-section" style={{ backgroundImage: `url(${images[currentImageIndex]})` }}>
       <div className="hero-content">
-        <h1>Welcome to the Art & Pins Store</h1>
-        <p>Discover our unique collection of art and pins.</p>
+        <h1>Welcome to the Day Off Market</h1>
+        <p>Discover our unique collection of tangible artwork</p>
       </div>
     </div>
   );

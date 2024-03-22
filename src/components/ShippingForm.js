@@ -7,9 +7,16 @@ const ShippingForm = ({ onFormSubmit }) => {
         const shippingData = Object.fromEntries(formData.entries());
 
         console.log('Form Data:', shippingData);
-
-        // Call the onFormSubmit function passed as a prop to notify the parent component
         onFormSubmit(shippingData);
+
+        // To allow Netlify to handle form submission, the fetch call is commented out
+        // fetch("/", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        //     body: new URLSearchParams(formData).toString(),
+        // })
+        // .then(() => console.log("Form successfully submitted"))
+        // .catch((error) => console.error("Form submission error:", error));
     };
 
     return (
@@ -19,10 +26,10 @@ const ShippingForm = ({ onFormSubmit }) => {
                 <label>Name: <input type="text" name="name" required /></label>
             </p>
             <p>
-                <label>Email (Optional): <input type="email" name="email" /></label> {/* Removed required attribute */}
+                <label>Email (Optional): <input type="email" name="email" /></label>
             </p>
             <p>
-                <label>Discord Username (Optional): <input type="text" name="discord" /></label> {/* Optional Discord field */}
+                <label>Discord Username (Optional): <input type="text" name="discord" /></label>
             </p>
             <p>
                 <label>Address: <textarea name="address" required /></label>
