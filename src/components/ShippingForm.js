@@ -10,13 +10,13 @@ const ShippingForm = ({ onFormSubmit }) => {
         onFormSubmit(shippingData);
 
         // To allow Netlify to handle form submission, the fetch call is commented out
-        // fetch("/", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        //     body: new URLSearchParams(formData).toString(),
-        // })
-        // .then(() => console.log("Form successfully submitted"))
-        // .catch((error) => console.error("Form submission error:", error));
+         fetch("/", {
+             method: "POST",
+             headers: { "Content-Type": "application/x-www-form-urlencoded" },
+             body: new URLSearchParams(formData).toString(),
+         })
+         .then(() => console.log("Form successfully submitted"))
+         .catch((error) => console.error("Form submission error:", error));
     };
 
     return (
