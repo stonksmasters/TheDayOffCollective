@@ -1,0 +1,65 @@
+/* ReviewOrder CSS */
+.review-order {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.review-order h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.review-order ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.review-order li {
+    background-color: #f2f2f2;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.review-order p {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.review-order button {
+    display: block;
+    width: calc(50% - 10px);
+    margin: 10px auto;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-order button:hover {
+    background-color: #0056b3;
+}
+
+.review-order button:nth-last-child(2) { /* Targeting the second last button for confirm */
+    background-color: #007bff;
+}
+
+.review-order button:last-child { /* Specifically targeting the last button for cancel */
+    background-color: #dc3545;
+}
+
+.review-order button:last-child:hover {
+    background-color: #c82333;
+}

@@ -7,12 +7,12 @@ const Footer = () => {
             <div className="footer-content">
                 <div className="footer-section">
                     <h4>About Us</h4>
-                    <p>Art & Pins Store is a leading provider of unique NFT art and collectible pins.</p>
+                    <p>Day Off Market is a provider of unique NFT art and collectible pins.</p>
                 </div>
                 <div className="footer-section">
                     <h4>Contact Us</h4>
-                    <p>Email: contact@artpinsstore.com</p>
-                    <p>Phone: +123 456 7890</p>
+                    <p>Email: contact@DayOffCollective.com</p>
+                    <p>Phone: +631 807 8017</p>
                 </div>
                 <div className="footer-section">
                     <h4>Follow Us</h4>
@@ -24,7 +24,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className="footer-bottom">
-                &copy; {new Date().getFullYear()} Art & Pins Store. All rights reserved.
+                &copy; {new Date().getFullYear()} Day Off Market. All rights reserved.
             </div>
         </footer>
     );

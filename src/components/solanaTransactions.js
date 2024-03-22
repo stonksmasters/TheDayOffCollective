@@ -3,19 +3,25 @@ import { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL } f
 
 export const sendTransaction = async (wallet, amount, cartItems) => {
     try {
-        // Using Alchemy's Solana mainnet endpoint
         const ALCHEMY_ENDPOINT = "https://solana-mainnet.g.alchemy.com/v2/7VqGQlnQ0MGxXUj4dOdEKjr7v-Q6r5DZ";
         const connection = new Connection(ALCHEMY_ENDPOINT, 'confirmed');
 
         console.log("[SolanaTransactions] Connection established to mainnet-beta using Alchemy.");
 
-        const receiverAddress = new PublicKey('6Zt2LncArHxW966f9HumVqFiCQE1hPxSCoxPDHekEfog');
+        const receiverAddress = new PublicKey('HeGffZqFhB9euhind4aJFWy8waLCppTkie4gvW8bQhzp');
         console.log(`[SolanaTransactions] Receiver address: ${receiverAddress.toString()}`);
 
         const lamports = amount * LAMPORTS_PER_SOL;
-        console.log(`[SolanaTransactions] Sending ${amount} SOL (${lamports} lamports)`);
+        console.log(`[SolanaTransactions] Sending ${amount} SOL (${lamports} lamports) to ${receiverAddress.toString()}`);
 
-        const transaction = new Transaction().add(
+        // Fetch the recent blockhash to ensure the transaction is recent
+        const { blockhash } = await connection.getRecentBlockhash('finalized');
+        console.log(`[SolanaTransactions] Recent blockhash: ${blockhash}`);
+
+        const transaction = new Transaction({
+            recentBlockhash: blockhash,
+            feePayer: wallet.publicKey // Set the fee payer
+        }).add(
             SystemProgram.transfer({
                 fromPubkey: wallet.publicKey,
                 toPubkey: receiverAddress,
@@ -23,12 +29,15 @@ export const sendTransaction = async (wallet, amount, cartItems) => {
             })
         );
 
-        console.log("[SolanaTransactions] Transaction created, sending...");
-        const signature = await wallet.sendTransaction(transaction, connection);
-        console.log("[SolanaTransactions] Transaction sent, waiting for confirmation...");
+        console.log("[SolanaTransactions] Transaction created, signing...");
+        const signedTransaction = await wallet.signTransaction(transaction);
+        console.log("[SolanaTransactions] Transaction signed, sending...");
 
-        await connection.confirmTransaction(signature);
-        console.log('Transaction successful with signature:', signature);
+        const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+        console.log("[SolanaTransactions] Transaction sent, signature: ", signature);
+
+        await connection.confirmTransaction(signature, 'finalized');
+        console.log("[SolanaTransactions] Transaction confirmed");
 
         return signature;
     } catch (error) {

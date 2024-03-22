@@ -55,25 +55,64 @@ body {
   width: 300px;
   max-height: 90vh;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  z-index: 1; /* Ensure it is high enough to float above other content */
-  padding: 10px;
-  border-radius: 5px;
+  background-color: #f9f9f9; /* Light grey background for a subtle look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for depth */
+  z-index: 1000; /* High enough to float above other content */
+  padding: 15px;
+  border-radius: 8px; /* Rounded corners for a modern feel */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font style */
+}
+
+.cart h2 {
+  color: #333; /* Dark grey color for the heading */
+  margin-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc; /* Subtle separation line */
+}
+
+.cart-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee; /* Light line to separate items */
+}
+
+.cart-item p {
+  margin: 5px 0;
 }
 
 button {
-  background-color: #007bff;
+  background-color: #0056b3; /* Dark blue for primary actions */
   color: white;
   padding: 10px 15px;
+  margin: 5px;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px; /* Consistent rounding with the form */
   cursor: pointer;
   transition: background-color 0.3s;
+  font-size: 14px; /* Appropriate text size */
+  width: 100%; /* Full-width buttons for better clickability */
+  text-align: center; /* Centered text */
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #004080; /* Darker blue on hover for visual feedback */
+}
+
+.toggle-cart-button {
+  background-color: #0056b3; /* Matching the cart button color */
+  color: white;
+  border: none;
+  padding: 8px 12px; /* Slightly smaller padding for the toggle button */
+  border-radius: 4px; /* Consistent border radius */
+  cursor: pointer;
+  position: fixed;
+  right: 20px;
+  top: 100px;
+  z-index: 1010; /* Slightly above the cart for accessibility */
+}
+
+.toggle-cart-button:hover {
+  background-color: #004080;
 }
 
 .header {
@@ -123,22 +162,7 @@ button:hover {
   border-radius: 10px;
 }
 
-.toggle-cart-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  position: fixed; /* Make sure it's visible and accessible */
-  right: 20px; /* Adjust as necessary */
-  top: 100px; /* Adjust as necessary */
-  z-index: 2; /* Above the cart */
-}
 
-.toggle-cart-button:hover {
-  background-color: #0056b3;
-}
 
 .video-container {
   display: flex;
@@ -190,17 +214,20 @@ button:hover {
 }
 
 .footer {
-  background-color: #333;
-  color: white;
-  padding: 20px 0;
-  font-size: 14px;
+  background-color: #222; /* Darker shade for depth */
+  color: #ddd; /* Lighter text for better readability */
+  padding: 40px 0; /* More padding for a spacious look */
+  font-size: 16px; /* Slightly larger font for readability */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Consistent font style */
 }
 
 .footer-content {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between; /* Better spacing around */
+  align-items: center; /* Vertically align items */
+  max-width: 1200px; /* Max width to constrain content on larger screens */
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px; /* Padding on sides */
 }
 
 .footer-section {
@@ -208,27 +235,147 @@ button:hover {
 }
 
 .footer-section h4 {
-  margin-bottom: 10px;
+  margin-bottom: 15px; /* More space below headings */
+  color: #fff; /* Brighter color for headings */
+  font-size: 18px; /* Larger font size for headings */
 }
 
 .social-icons {
   display: flex;
   list-style: none;
+  padding: 0;
+}
+
+.social-icons li {
+  margin: 0 10px; /* Uniform margin for icons */
 }
 
 .social-icons a {
-  margin-right: 10px;
+  display: inline-block; /* Align properly */
   color: white;
   text-decoration: none;
+  transition: color 0.3s; /* Smooth color transition for hover */
 }
 
 .social-icons a:hover {
-  color: #007bff;
+  color: #007bff; /* Bright blue on hover for interactivity */
 }
 
 .footer-bottom {
   text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid #4f4f4f;
-  padding-top: 10px;
+  margin-top: 40px; /* More space above the bottom section */
+  border-top: 1px solid #444; /* Lighter border for subtle contrast */
+  padding-top: 20px; /* More padding above the bottom text */
+}
+
+/* ShippingForm CSS */
+form[name="shipping"] {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+form[name="shipping"] p {
+  margin: 0;
+  padding: 10px 0;
+}
+
+form[name="shipping"] label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
+form[name="shipping"] input,
+form[name="shipping"] textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box; /* Added to include padding in width */
+}
+
+form[name="shipping"] button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+form[name="shipping"] button:hover {
+  background-color: #003d7a;
+}
+/* ReviewOrder CSS */
+.review-order {
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.review-order h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review-order ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.review-order li {
+  background-color: #f2f2f2;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.review-order p {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.review-order button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.review-order button:hover {
+  background-color: #0056b3;
+}
+
+
+.review-order button:nth-last-child(2) { /* Targeting the second last button for confirm */
+  background-color: #007bff;
+}
+
+.review-order button:last-child { /* Specifically targeting the last button for cancel */
+  background-color: #dc3545;
+}
+
+.review-order button:last-child:hover {
+  background-color: #c82333;
 }

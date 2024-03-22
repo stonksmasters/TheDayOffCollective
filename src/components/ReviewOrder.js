@@ -1,11 +1,10 @@
-// src/components/ReviewOrder.js
 import React from 'react';
-
+import './reviewOrder.css';
 const ReviewOrder = ({ items, onConfirm, onCancel }) => {
     const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
 
     return (
-        <div>
+        <div className="review-order">
             <h2>Review Your Order</h2>
             <ul>
                 {items.map((item) => (

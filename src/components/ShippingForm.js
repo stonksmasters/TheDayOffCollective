@@ -19,7 +19,10 @@ const ShippingForm = ({ onFormSubmit }) => {
                 <label>Name: <input type="text" name="name" required /></label>
             </p>
             <p>
-                <label>Email: <input type="email" name="email" required /></label>
+                <label>Email (Optional): <input type="email" name="email" /></label> {/* Removed required attribute */}
+            </p>
+            <p>
+                <label>Discord Username (Optional): <input type="text" name="discord" /></label> {/* Optional Discord field */}
             </p>
             <p>
                 <label>Address: <textarea name="address" required /></label>
