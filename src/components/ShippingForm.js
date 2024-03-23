@@ -18,11 +18,16 @@ const ShippingForm = ({ onFormSubmit }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Netlify will handle the form submission, but we prevent the default behavior here
+
+        console.log('Form Data:', formData);
+        onFormSubmit(formData);
+
+        // Important: Trigger the native form submission for Netlify handling
+        event.target.submit();
     };
 
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={() => onFormSubmit(formData)}>
+        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
             <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
