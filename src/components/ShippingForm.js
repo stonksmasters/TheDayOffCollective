@@ -16,9 +16,13 @@ const ShippingForm = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Netlify handles the form submission, no need for custom logic here
+    };
+
     return (
-        <form name="shipping" method="POST" data-netlify="true">
-            <input type="hidden" name="form-name" value="shipping" />
+        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
             </p>
@@ -39,12 +43,10 @@ const ShippingForm = () => {
             </p>
             <p>
                 <label>Zip Code: <input type="text" name="zipcode" value={formData.zipcode} onChange={handleChange} required /></label>
-
             </p>
             <p>
                 <button type="submit">Proceed to Checkout</button>
             </p>
-            {/* Hidden input for form-name */}
             <input type="hidden" name="form-name" value="shipping" />
         </form>
     );
