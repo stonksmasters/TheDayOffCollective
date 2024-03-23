@@ -25,7 +25,6 @@ const ShippingForm = () => {
 
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-            <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
             </p>
@@ -50,6 +49,8 @@ const ShippingForm = () => {
             <p>
                 <button type="submit">Proceed to Checkout</button>
             </p>
+            {/* Hidden input for form-name */}
+            <input type="hidden" name="form-name" value="shipping" />
         </form>
     );
 };
