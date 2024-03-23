@@ -24,12 +24,16 @@ const ShippingForm = () => {
     };
 
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <form 
+        name="shipping" 
+        method="POST" 
+        data-netlify="true" 
+        onSubmit="submit">
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
             </p>
             <p>
-                <label>Email (Optional): <input type="email" name="email" value={formData.email} onChange={handleChange} /></label>
+                <label htmlFor= "email">Email (Optional): <input id="email" name="email" value={formData.email} onChange={handleChange} /></label>
             </p>
             <p>
                 <label>Discord Username (Optional): <input type="text" name="discord" value={formData.discord} onChange={handleChange} /></label>
