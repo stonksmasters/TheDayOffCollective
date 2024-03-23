@@ -1,18 +1,32 @@
 // src/components/Header.js
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import Cart from './Cart'; // Assuming Cart is a component
 
-const Header = () => {
+const Header = ({ cartItems, removeFromCart }) => {
     return (
-        <header className="header">
-            <h1>The Day Off Collective</h1>
-            <nav>
-                <ul className="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/store">Store</a></li>
-                    <li><a href="/about">About</a></li>
-                </ul>
-            </nav>
-        </header>
+        <>
+            <header className="primary-header">
+                <h1>Day Off Collective</h1>
+            </header>
+            <header className="secondary-header">
+                <div className="wallet-button">
+                    <WalletMultiButton />
+                </div>
+                <nav className="nav-links">
+                    
+                        <Link to="/">Home</Link>
+                        <Link to="/marketplace">Marketplace</Link>
+                        <Link to="/comics">Comics</Link>
+                        <Link to="/recipes">Recipes</Link>
+                    
+                </nav>
+                <div className="cart-button">
+                    <Cart items={cartItems} removeFromCart={removeFromCart} />
+                </div>
+            </header>
+        </>
     );
 };
 

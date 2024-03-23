@@ -1,5 +1,6 @@
 // src/components/HeroSection.js
 import React, { useState, useEffect } from 'react';
+import "../App.css"
 
 const images = [
   '/images/Nft1.png',

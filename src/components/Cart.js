@@ -11,19 +11,24 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const wallet = useWallet();
 
     useEffect(() => {
-        setCartItems(mergeItemsWithQuantities(items));
+        if (items && items.length > 0) {
+            setCartItems(mergeItemsWithQuantities(items));
+        }
     }, [items]);
 
     const mergeItemsWithQuantities = (items) => {
         const itemMap = {};
-        items.forEach(item => {
-            if (itemMap[item.id]) {
-                itemMap[item.id].quantity += 1;
-            } else {
-                itemMap[item.id] = { ...item, quantity: 1 };
-            }
-        });
-        return Object.values(itemMap);
+        if (items && items.length > 0) {
+            items.forEach(item => {
+                if (itemMap[item.id]) {
+                    itemMap[item.id].quantity += 1;
+                } else {
+                    itemMap[item.id] = { ...item, quantity: 1 };
+                }
+            });
+            return Object.values(itemMap);
+        }
+        return [];
     };
 
     const handleShippingSubmit = (data) => {
