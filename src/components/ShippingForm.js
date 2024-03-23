@@ -8,19 +8,10 @@ const ShippingForm = ({ onFormSubmit }) => {
 
         console.log('Form Data:', shippingData);
         onFormSubmit(shippingData);
-
-        // To allow Netlify to handle form submission, the fetch call is commented out
-        // fetch("/", {
-        //     method: "POST",
-        //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        //     body: new URLSearchParams(formData).toString(),
-        // })
-        // .then(() => console.log("Form successfully submitted"))
-        // .catch((error) => console.error("Form submission error:", error));
     };
 
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <form name="shipping" method="POST" data-netlify="true" onSubmit="submit">
             <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" required /></label>
