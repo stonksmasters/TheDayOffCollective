@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ShippingForm = () => {
+const ShippingForm = ({ onFormSubmit }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -22,7 +22,7 @@ const ShippingForm = () => {
     };
 
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <form name="shipping" method="POST" data-netlify="true" onSubmit={() => onFormSubmit(formData)}>
             <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
