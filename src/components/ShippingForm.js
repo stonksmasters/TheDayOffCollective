@@ -18,11 +18,12 @@ const ShippingForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Netlify handles the form submission, no need for custom logic here
+        // Netlify will handle the form submission, but we prevent the default behavior here
     };
 
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+            <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
             </p>
@@ -47,7 +48,6 @@ const ShippingForm = () => {
             <p>
                 <button type="submit">Proceed to Checkout</button>
             </p>
-            <input type="hidden" name="form-name" value="shipping" />
         </form>
     );
 };
