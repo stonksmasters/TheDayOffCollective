@@ -6,22 +6,26 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
 import Videos from './components/Videos';
+import Marketplace from './components/Marketplace';
+import Comics from './components/Comics';
+import Recipes from './components/Recipes';
 
 import Footer from './components/Footer';
 import products from './data/products';
 import './App.css';
 
-const Marketplace = () => <div>Marketplace Page</div>;
-const Comics = () => <div>Comics Page</div>;
-const Recipes = () => <div>Recipes Page</div>;
+
+// Define the featured products, for example, the first three products
+const featuredProducts = products.slice(0, 3);
 
 const HomePage = ({ addToCart }) => (
     <div>
         <HeroSection />
-        <ProductList products={products} addToCart={addToCart} />
+        <ProductList products={featuredProducts} addToCart={addToCart} />
         <Videos />
     </div>
 );
+
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
@@ -42,7 +46,7 @@ function App() {
                 <Header cartItems={cartItems} removeFromCart={removeFromCart} />
                 <Routes>
                     <Route path="/" element={<HomePage addToCart={addToCart} />} />
-                    <Route path="/marketplace" element={<Marketplace />} />
+                    <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
                     <Route path="/comics" element={<Comics />} />
                     <Route path="/recipes" element={<Recipes />} />
                 </Routes>

@@ -413,6 +413,73 @@ form[name="shipping"] button:hover {
 .review-order button:hover {
   background-color: #8267c6; /* Lighter purple for button hover */
 }
+/* Add this CSS to your App.css or a specific CSS file for comic styles */
+
+.comic-item {
+  background-color: var(--light-green);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin: 10px; /* Add some margin to separate comic items */
+}
+
+.comic-item:hover {
+  transform: scale(1.05);
+}
+
+.comic-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.comic-item h2 { /* Assuming h2 is used for comic titles */
+  margin: 15px 0 10px;
+  color: var(--secondary-color);
+}
+
+.comic-item p {
+  color: var(--dark-gray); /* Example color, adjust as needed */
+}
+/* Add this CSS to your App.css or a specific CSS file for recipes styles */
+
+/* Add this CSS to your App.css or a specific CSS file for recipes styles */
+
+.recipe-item {
+  background-color: var(--light-green);
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  margin: 10px;
+}
+
+.recipe-item:hover {
+  transform: scale(1.05);
+}
+
+.recipe-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.recipe-item h3 {
+  margin: 15px 0 10px;
+  color: var(--secondary-color);
+}
+
+.recipe-item p {
+  color: var(--dark-gray);
+}
+
 
 /* Existing CSS styles */
 
@@ -429,7 +496,7 @@ form[name="shipping"] button:hover {
       gap: 10px;
   }
 
-  .product-item {
+  .product-item, .comic-item, .recipe-item {
       width: 100%; /* Full width for better visibility on small screens */
       margin: 5px;
   }
@@ -534,7 +601,7 @@ form[name="shipping"] button:hover {
 }
 
 @media (max-width: 480px) {
-  .product-item, .video {
+  .product-item, .comic-item, .recipe-item, .video {
       margin: 0 auto; /* Center these items on very small screens */
       max-width: 90%; /* Slightly reduce width for screen edge spacing */
   }
