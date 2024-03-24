@@ -1,18 +1,30 @@
-/* src/App.css */
+:root {
+  --primary-color: #8267c6;
+  --secondary-color: #6b34b7;
+  --light-green: #c3f8cc;
+  --lightest-background: #f1fff2;
+  --light-green-background: #b3e9c7;
+  --dark-text: #403d39;
+  --border-color: #ccc;
+  --border-light: #eee;
+  --font-family-main: 'Helvetica Neue', sans-serif;
+  --font-family-alt: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: var(--font-family-main);
   margin: 0;
   padding: 0;
-  background-color: #f1fff2; /* Lightest background */
-  color: #8267c6; /* Primary text color */
-  overflow-x: hidden; /* Ensure no horizontal scroll */
+  background-color: var(--lightest-background);
+  color: var(--primary-color);
+  overflow-x: hidden;
 }
 
 .App {
   max-width: 1200px;
   margin: auto;
   padding: 20px;
-  position: relative; /* Added for z-index context */
+  position: relative;
 }
 
 .product-list {
@@ -23,7 +35,7 @@ body {
 }
 
 .product-item {
-  background-color: #c3f8cc; /* Light green background for product items */
+  background-color: var(--light-green);
   border: none;
   border-radius: 10px;
   padding: 15px;
@@ -45,7 +57,7 @@ body {
 
 .product-item h3 {
   margin: 15px 0 10px;
-  color: #6b34b7; /* Dark purple for item titles */
+  color: var(--secondary-color);
 }
 
 .cart {
@@ -55,25 +67,25 @@ body {
   width: 300px;
   max-height: 90vh;
   overflow-y: auto;
-  background-color: #b3e9c7; /* Light green for cart */
+  background-color: var(--light-green-background);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   padding: 15px;
   border-radius: 8px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-family-alt);
 }
 
 .cart h2 {
-  color: #8267c6;
+  color: var(--primary-color);
   margin-top: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .cart-item {
   margin-bottom: 15px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .cart-item p {
@@ -81,8 +93,8 @@ body {
 }
 
 button {
-  background-color: #6b34b7;
-  color: #f1fff2;
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
   padding: 10px 15px;
   margin: 5px;
   border: none;
@@ -95,12 +107,12 @@ button {
 }
 
 button:hover {
-  background-color: #8267c6;
+  background-color: var(--primary-color);
 }
 
 .toggle-cart-button {
-  background-color: #6b34b7;
-  color: #f1fff2;
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -112,58 +124,59 @@ button:hover {
 }
 
 .toggle-cart-button:hover {
-  background-color: #8267c6;
+  background-color: var(--primary-color);
 }
 
 .primary-header {
   text-align: center;
   padding: 20px 0;
-  background-color: #6b34b7; /* Primary color */
-  color: #f1fff2; /* Lightest color for text */
-}
-
-.primary-header h1 {
-  margin: 0;
-  font-size: 2.5em; /* Larger font size for the logo */
-  font-weight: bold;
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
+  border: 2px solid #6b34b7;
+  margin-top: 50px; /* Adjust this value based on the actual height of your cart */
 }
 
 .secondary-header {
-  background-color: #8267c6;
+  background-color: var(--primary-color);
+  border: solid 2px #6b34b7;
   display: flex;
-  justify-content: space-between; /* This will be changed to center the navigation links */
-  align-items: center;
-  padding: 10px 0;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  border: 2px solid #6b34b7;
+}
+
+.wallet-button {
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
+  border: 2px solid #6b34b7;
+  width: 95%;
+  padding: 5px;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
+  flex-direction: column;
+  width: 100%;
   padding: 0;
-  align-items: center;
-  /* Add right margin to push nav links slightly to the left */
-  margin-right: 15%; /* Adjust percentage as needed to move more to the left */
-}
-
-.nav-links li {
-  margin: 0 10px;
 }
 
 .nav-links a {
-  color: #f1fff2;
-  background-color: #8267c6; /* Slightly darker for contrast */
+  background-color: var(--primary-color);
+  color: var(--lightest-background);
+  text-align: center;
+  padding: 10px;
+  display: block;
   text-decoration: none;
-  font-size: 1em; /* Adjust the font size as needed */
-  padding: 10px 15px; /* More padding for a button-like appearance */
-  border: solid 2px #6b34b7; /* Border to enhance appearance */
-  border-radius: 5px; /* Soft rounded corners for a modern look */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+  border:solid 2px #6b34b7;
+  margin: 2px 0;
 }
 
-.nav-links a:hover {
-  background-color: #6b34b7; /* Darker shade for hover */
-  color: #c3f8cc; /* Light green for hover text */
-}
+
 
 
 .wallet-button, .cart-button {
@@ -397,4 +410,99 @@ form[name="shipping"] button:hover {
 
 .review-order button:hover {
   background-color: #8267c6; /* Lighter purple for button hover */
+}
+
+/* Existing CSS styles */
+
+/* Your existing CSS code goes here */
+
+/* Mobile-friendly adaptations */
+
+@media (max-width: 768px) {
+  .App {
+      padding: 10px;
+  }
+
+  .product-list {
+      gap: 10px;
+  }
+
+  .product-item {
+      width: 100%; /* Full width for better visibility on small screens */
+      margin: 5px;
+  }
+
+  .cart {
+      width: 100%;
+      top: 0;
+      right: 0;
+      height: auto;
+      max-height: 100vh;
+      overflow-y: auto;
+      position: fixed;
+      z-index: 1050; /* High z-index to ensure it's above other content */
+  }
+
+  .toggle-cart-button {
+      top: 60px; /* Adjust position to avoid overlap with other elements */
+  }
+
+  .primary-header, .secondary-header {
+      padding: 10px 0; /* Reduce padding to save space */
+  }
+
+  .nav-links a {
+      padding: 8px; /* Reduce padding for link items to fit more on screen */
+  }
+
+  .hero-section {
+      padding: 20px 0; /* Adjust padding to fit small screens */
+      height: auto; /* Auto height for flexibility */
+  }
+
+  .video {
+      width: 100%; /* Full width for videos to utilize space */
+      margin: 10px 0; /* Add margin for spacing between videos */
+  }
+
+  .footer {
+      padding: 20px 0; /* Reduce footer padding on small screens */
+  }
+
+  .footer-content {
+      flex-direction: column;
+  }
+
+  .footer-section {
+      margin-bottom: 20px; /* Add more space between footer sections */
+  }
+
+  form[name="shipping"], .review-order {
+      padding: 15px; /* Reduce padding for form elements */
+      max-width: 100%; /* Full width for forms */
+  }
+}
+
+@media (max-width: 480px) {
+  .product-item, .video {
+      margin: 0 auto; /* Center these items on very small screens */
+      max-width: 90%; /* Slightly reduce width for screen edge spacing */
+  }
+
+  .nav-links a {
+      font-size: 14px; /* Reduce font size for better readability */
+  }
+
+  .cart-button, .wallet-button, button {
+      padding: 8px 10px; /* Reduce button padding for more space */
+      font-size: 12px; /* Smaller font size for text in buttons */
+  }
+
+  .hero-content, .video p, .footer-section h4 {
+      font-size: 14px; /* Reduce font size for consistent readability */
+  }
+
+  .footer-bottom {
+      font-size: 12px; /* Smaller font size for footer bottom text */
+  }
 }
