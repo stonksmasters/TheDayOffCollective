@@ -435,22 +435,62 @@ form[name="shipping"] button:hover {
   }
 
   .cart {
-      width: 100%;
-      top: 0;
-      right: 0;
-      height: auto;
-      max-height: 100vh;
-      overflow-y: auto;
-      position: fixed;
-      z-index: 1050; /* High z-index to ensure it's above other content */
+    width: 100%;
+    top: 0;
+    right: 0;
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 1050; /* High z-index to ensure it's above other content */
+    padding: 20px; /* Add padding for internal spacing */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
+    background-color: var(--light-green-background); /* Consistent background with the theme */
+    border-bottom: 1px solid var(--border-color); /* Define a border for the bottom edge */
+    box-sizing: border-box; /* Include padding in width */
   }
+  
+  .cart h2 {
+    font-size: 1.25em; /* Increase font size for headers */
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color); /* A border to separate the header */
+    color: var(--dark-text); /* Use a dark color for better readability */
+  }
+  
+  .cart-item {
+    font-size: 1em; /* Adjust font size for items */
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light); /* Separation between items */
+  }
+  
+  .cart-item p {
+    margin: 5px 0;
+    line-height: 1.5; /* Improved line height for readability */
+  }
+  
+  button {
+    background-color: var(--secondary-color);
+    color: var(--lightest-background);
+    padding: 12px 15px; /* Larger padding for a touch-friendly button */
+    margin: 10px 0; /* Space out buttons */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em; /* Larger font size for readability */
+    width: auto; /* Auto width for button flexibility */
+    text-align: center;
+    display: block; /* Ensure buttons are block level for full width tap area */
+  }
+  
 
   .toggle-cart-button {
       top: 60px; /* Adjust position to avoid overlap with other elements */
   }
 
   .primary-header{
-    margin-top: 50px; /* Adjust this value based on the actual height of your cart */
+    margin-top: 80px; /* Adjust this value based on the actual height of your cart */
     padding: 10px 0;
   } .secondary-header {
       padding: 10px 0; /* Reduce padding to save space */
