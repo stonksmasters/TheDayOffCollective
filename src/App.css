@@ -133,7 +133,7 @@ button:hover {
   background-color: var(--secondary-color);
   color: var(--lightest-background);
   border: 2px solid #6b34b7;
-  margin-top: 50px; /* Adjust this value based on the actual height of your cart */
+ 
 }
 
 .secondary-header {
@@ -449,7 +449,10 @@ form[name="shipping"] button:hover {
       top: 60px; /* Adjust position to avoid overlap with other elements */
   }
 
-  .primary-header, .secondary-header {
+  .primary-header{
+    margin-top: 50px; /* Adjust this value based on the actual height of your cart */
+    padding: 10px 0;
+  } .secondary-header {
       padding: 10px 0; /* Reduce padding to save space */
   }
 
