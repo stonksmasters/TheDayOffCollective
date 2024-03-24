@@ -140,27 +140,31 @@ button:hover {
   background-color: var(--primary-color);
   border: solid 2px #6b34b7;
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  align-items: center; /* Vertically centers the flex items */
+  justify-content: flex-start; /* Aligns items to the start of the flex container */
   padding: 10px;
+  flex-direction: column;
   box-sizing: border-box;
   width: 100%;
   border: 2px solid #6b34b7;
 }
 
 .wallet-button {
-  background-color: var(--secondary-color);
-  color: var(--lightest-background);
-  border: 2px solid #6b34b7;
-  width: 95%;
+  width: 100%;
   padding: 5px;
   margin-bottom: 10px;
   text-align: center;
+  flex-shrink: 0;
+  margin-right: 20px;
+  box-sizing: border-box; /* Ensures padding and border are included in the width */
+  flex-grow: 1; /* Allows the button to grow to fill the space as needed */
+  max-width: calc(100% - 20px); /* Limits the width to prevent overflow */
 }
 
 .nav-links {
+  flex-grow: 1; /* Allows navigation links to fill the remaining space */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Change this to row for a horizontal layout */
   width: 100%;
   padding: 0;
 }
@@ -179,9 +183,7 @@ button:hover {
 
 
 
-.wallet-button, .cart-button {
-  margin: 0 20px; /* Add some horizontal space around these buttons */
-}
+
 
 .cart-button {
   display: flex;
@@ -493,7 +495,7 @@ form[name="shipping"] button:hover {
       font-size: 14px; /* Reduce font size for better readability */
   }
 
-  .cart-button, .wallet-button, button {
+  .cart-button, button {
       padding: 8px 10px; /* Reduce button padding for more space */
       font-size: 12px; /* Smaller font size for text in buttons */
   }
