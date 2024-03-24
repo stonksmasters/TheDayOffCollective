@@ -458,8 +458,13 @@ form[name="shipping"] button:hover {
   }
 
   .hero-section {
-      padding: 20px 0; /* Adjust padding to fit small screens */
-      height: auto; /* Auto height for flexibility */
+    padding: 20px; /* Adjust padding to provide consistent spacing */
+    min-height: 100vh; /* Minimum height is the full viewport height */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    overflow-y: auto; /* Allow scrolling if content overflows */
   }
 
   .video {
