@@ -1,12 +1,19 @@
 // src/components/Marketplace.js
 import React from 'react';
 import ProductList from './ProductList';
-import products from '../data/products'; // Import products from the data file
+import HeroSections from './HeroSections';
+import products from '../data/products';
+
+const marketplaceImages = ['/images/holo.gif', '/images/goon pin.jpg']; // Array of image URLs for the marketplace
 
 const Marketplace = ({ addToCart }) => {
     return (
-        <div className="marketplace">
-            <h1>Marketplace</h1>
+        <div>
+            <HeroSections
+    images={marketplaceImages}
+    title="Welcome to the Marketplace"
+    text="Explore our exclusive collection of products."
+/>
             <ProductList products={products} addToCart={addToCart} />
         </div>
     );

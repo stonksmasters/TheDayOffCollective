@@ -26,7 +26,7 @@ const HeroSection = () => {
     <div className="hero-section" style={{ backgroundImage: `url(${images[currentImageIndex]})` }}>
       <div className="hero-content">
         <h1>Welcome to the Day Off Market</h1>
-        <p>Discover our unique collection of tangible artwork</p>
+        <p>We craft a Web3 experience that celebrates relaxation and rejuvenation, ensuring you savor every moment of your downtime. Our mission is to inspire a refreshed mindset, equipping you to tackle challenges with renewed vigor each week.</p>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 // src/components/Recipes.js
 import React from 'react';
+import HeroSections from './HeroSections';
 
+const recipesImages = ['/images/recipe.jpg', '/images/recipe.jpg'];
 const mockRecipes = [
     {
         id: '1',
@@ -21,6 +23,12 @@ const Recipes = () => {
     return (
         <div className="recipes">
             <h1>Recipes</h1>
+            <HeroSections
+    images={recipesImages}
+    title="Recipes Collection"
+    text="Cook delicious meals with our easy-to-follow recipes."
+/>
+
             <div className="recipes-list">
                 {mockRecipes.map(recipe => (
                     <div key={recipe.id} className="recipe-item">

@@ -479,7 +479,18 @@ form[name="shipping"] button:hover {
 .recipe-item p {
   color: var(--dark-gray);
 }
+.hero-sections {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
 
+.hero-sections img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: opacity 0.5s ease-in-out;
+}
 
 /* Existing CSS styles */
 
@@ -623,3 +634,4 @@ form[name="shipping"] button:hover {
       font-size: 12px; /* Smaller font size for footer bottom text */
   }
 }
+
