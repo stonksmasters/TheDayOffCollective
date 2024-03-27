@@ -6,6 +6,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
 import Videos from './components/Videos';
+import Marketplace from './components/Marketplace';
 import ComingSoon from './components/ComingSoon'; // Import the ComingSoon component
 
 import Footer from './components/Footer';
@@ -42,7 +43,7 @@ function App() {
                 <Header cartItems={cartItems} removeFromCart={removeFromCart} />
                 <Routes>
                     <Route path="/" element={<HomePage addToCart={addToCart} />} />
-                    <Route path="/marketplace" element={<ComingSoon sectionTitle="Marketplace" />} />
+                    <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
                     <Route path="/comics" element={<ComingSoon sectionTitle="Comics" />} />
                     <Route path="/recipes" element={<ComingSoon sectionTitle="Recipes" />} />
                 </Routes>
