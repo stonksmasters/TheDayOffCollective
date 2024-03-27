@@ -1,19 +1,16 @@
 // src/App.js
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Wallet from './components/Wallet'; // Import Wallet component
+import Wallet from './components/Wallet';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
 import Videos from './components/Videos';
-import Marketplace from './components/Marketplace';
-import Comics from './components/Comics';
-import Recipes from './components/Recipes';
+import ComingSoon from './components/ComingSoon'; // Import the ComingSoon component
 
 import Footer from './components/Footer';
 import products from './data/products';
 import './App.css';
-
 
 // Define the featured products, for example, the first three products
 const featuredProducts = products.slice(0, 3);
@@ -25,7 +22,6 @@ const HomePage = ({ addToCart }) => (
         <Videos />
     </div>
 );
-
 
 function App() {
     const [cartItems, setCartItems] = useState([]);
@@ -41,14 +37,14 @@ function App() {
     };
 
     return (
-        <Wallet> {/* Wrap the components that require wallet functionality */}
+        <Wallet>
             <div className="App">
                 <Header cartItems={cartItems} removeFromCart={removeFromCart} />
                 <Routes>
                     <Route path="/" element={<HomePage addToCart={addToCart} />} />
-                    <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
-                    <Route path="/comics" element={<Comics />} />
-                    <Route path="/recipes" element={<Recipes />} />
+                    <Route path="/marketplace" element={<ComingSoon sectionTitle="Marketplace" />} />
+                    <Route path="/comics" element={<ComingSoon sectionTitle="Comics" />} />
+                    <Route path="/recipes" element={<ComingSoon sectionTitle="Recipes" />} />
                 </Routes>
                 <Footer />
             </div>
