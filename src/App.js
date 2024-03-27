@@ -8,6 +8,7 @@ import ProductList from './components/ProductList';
 import Videos from './components/Videos';
 import Marketplace from './components/Marketplace';
 import ComingSoon from './components/ComingSoon'; // Import the ComingSoon component
+import AboutUs from './components/AboutUs';
 
 import Footer from './components/Footer';
 import products from './data/products';
@@ -19,6 +20,7 @@ const featuredProducts = products.slice(0, 3);
 const HomePage = ({ addToCart }) => (
     <div>
         <HeroSection />
+        <AboutUs />
         <ProductList products={featuredProducts} addToCart={addToCart} />
         <Videos />
     </div>
