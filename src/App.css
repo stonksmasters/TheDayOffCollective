@@ -214,48 +214,81 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
   justify-content: center;
+  margin-top: 50px;
 }
 
 .video {
-  position: relative;
-  width: 220px;
-  overflow: hidden;
+  background-color: var(--lightest-background);
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+  width: calc(25% - 20px); /* Four videos per row with spacing */
 }
 
 .video:hover {
-  transform: scale(1.05);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
 .video img {
   width: 100%;
-  height: 125px;
+  height: auto;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.video:hover img {
-  transform: scale(1.1);
+  border-radius: 10px 10px 0 0; /* Only round the top corners */
 }
 
 .video p {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  color: #f1fff2;
-  background-color: rgba(0, 0, 0, 0.7);
+  padding: 15px;
   margin: 0;
-  padding: 10px;
-  transition: background-color 0.3s ease;
+  background-color: var(--light-green);
+  color: var(--dark-text);
+  border-radius: 0 0 10px 10px; /* Only round the bottom corners */
+  font-size: 1em;
 }
 
-.video:hover p {
+.video-modal-backdrop {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.video-modal-content {
+  width: 90%; /* Limit width to 90% of the viewport width */
+  max-width: 560px; /* Maximum width of the modal */
+  position: relative;
+  background: var(--lightest-background);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.video-modal-close {
+  
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: var(--secondary-color);
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+/* Make sure the iframe is responsive */
+.video-modal-content iframe {
+  width: 100%;
+  height: 315px; /* Fixed height for now, could be made responsive */
+  border: none;
+  border-radius: 5px;
 }
 
 .footer {
@@ -504,82 +537,103 @@ form[name="shipping"] button:hover {
 
 .about-us {
   text-align: center;
-  padding: 50px;
-  background-color: #fff;
-  color: #333;
+  padding: 60px 20px;
+  background-color: var(--lightest-background);
+  color: var(--dark-text);
+  line-height: 1.6;
+  font-family: var(--font-family-main);
 }
 
 .about-us-hero h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
+  font-size: 2.8em;
+  color: var(--primary-color);
+  margin-bottom: 0.5em;
 }
 
 .about-us-hero p {
-  font-size: 1.2em;
-  color: #666;
+  font-size: 1.1em;
+  color: var(--dark-text);
+  max-width: 800px;
+  margin: auto; /* Centers the paragraph in the div */
 }
 
 .roadmap {
-  margin-top: 50px;
+  margin-top: 80px;
+  background-color: transparent;
 }
 
 .roadmap h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
+  font-size: 2.2em;
+  margin-bottom: 1em;
+  color: var(--primary-color);
 }
 
 .roadmap-list {
   list-style: none;
   padding: 0;
+  max-width: 800px; /* Setting a max-width for readability */
+  margin: auto; /* Centers the list in the section */
 }
 
 .roadmap-list h3 {
-  font-size: 1.5em;
-  color: #333;
+  font-size: 1.8em;
+  color: var(--dark-text);
+  margin: 2em 0 1em; /* More vertical space around section titles for clarity */
 }
 
 .roadmap-list p {
   font-size: 1em;
-  color: #666;
-  margin-bottom: 15px;
+  color: var(--dark-text);
+  margin-bottom: 1em;
 }
 
 .roadmap-list li {
-  margin-bottom: 25px;
-  background-color: #f3f3f3;
-  padding: 20px;
+  margin-bottom: 1em;
+  background-color: var(--lightest-background); /* A very light background for the list items */
+  padding: 2em;
   border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* A very subtle shadow */
 }
 /* Add this to your App.css */
-
-.product-list-section {
-  margin: 30px 0;
-}
-
-.product-list-title {
+/* ProductList component styles */
+.featured-products {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 2em;
-  color: #333;
-}
-
-.btn-view-all {
-  display: block;
-  width: fit-content;
-  padding: 10px 20px;
+  padding: 40px 20px;
+  background-color: var(--lightest-background);
   margin: 20px auto;
-  text-align: center;
-  background-color: #8267c6; /* Medium purple */
-  color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.featured-products-title {
+  color: var(--secondary-color);
+  font-family: var(--font-family-main);
+  margin-bottom: 30px;
+  font-size: 1.75em;
+}
+
+.view-all-button-container {
+  margin-top: 30px;
+}
+
+/* General button styles */
+.button {
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
+  padding: 10px 15px;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   text-decoration: none;
+  display: inline-block; /* So the width fits content */
+  font-family: var(--font-family-alt);
+  font-size: 1em;
   transition: background-color 0.3s ease;
 }
 
-.btn-view-all:hover {
-  background-color: #9b7be1; /* Lighter purple */
+.button:hover, .button:active {
+  background-color: var(--primary-color);
 }
+
 
 
 /* Existing CSS styles */
@@ -679,8 +733,15 @@ form[name="shipping"] button:hover {
   }
 
   .video {
-      width: 100%; /* Full width for videos to utilize space */
-      margin: 10px 0; /* Add margin for spacing between videos */
+    width: calc(50% - 20px); /* Two videos per row with spacing on tablets */
+  }
+
+  .video-modal-content iframe {
+    height: auto; /* Adjust height on smaller screens */
+  }
+  .video-modal-content {
+    height: auto; /* Adjust height on smaller screens */
+    width: 95%; /* Increase width to 95% on smaller screens for better visibility */
   }
 
   .footer {
@@ -699,7 +760,16 @@ form[name="shipping"] button:hover {
       padding: 15px; /* Reduce padding for form elements */
       max-width: 100%; /* Full width for forms */
   }
+  .featured-products-title {
+    font-size: 1.5em; /* Slightly smaller title on smaller screens */
+  }
+  .button {
+    padding: 8px 12px; /* Slightly smaller padding on buttons */
+    font-size: 0.9em; /* Slightly smaller font size for text inside buttons */
+  }
 }
+
+
 
 @media (max-width: 480px) {
   .product-item, .comic-item, .recipe-item, .video {

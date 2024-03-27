@@ -6,7 +6,7 @@ const AboutUs = () => {
         <div className="about-us">
             <div className="about-us-hero">
                 <h1>The Day Off Collective</h1>
-                <p>Dedicated to bridging the digital and physical realms through art, gaming, and community-driven experiences.</p>
+                <p>Offers a wide range of distinctive NFT art pieces and collectible real-life items. Our goal is to cultivate an enjoyable and laid-back atmosphere, both online and in real life, where you can immerse yourself in unique experiences.</p>
             </div>
             <div className="roadmap">
                 <h2>Our Roadmap</h2>
