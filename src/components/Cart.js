@@ -11,24 +11,20 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const wallet = useWallet();
 
     useEffect(() => {
-        if (items && items.length > 0) {
-            setCartItems(mergeItemsWithQuantities(items));
-        }
+        console.log('Cart items updated:', items);
+        setCartItems(mergeItemsWithQuantities(items));
     }, [items]);
 
     const mergeItemsWithQuantities = (items) => {
         const itemMap = {};
-        if (items && items.length > 0) {
-            items.forEach(item => {
-                if (itemMap[item.id]) {
-                    itemMap[item.id].quantity += 1;
-                } else {
-                    itemMap[item.id] = { ...item, quantity: 1 };
-                }
-            });
-            return Object.values(itemMap);
-        }
-        return [];
+        items.forEach(item => {
+            if (itemMap[item.id]) {
+                itemMap[item.id].quantity += 1;
+            } else {
+                itemMap[item.id] = { ...item, quantity: 1 };
+            }
+        });
+        return Object.values(itemMap);
     };
 
     const handleShippingSubmit = (data) => {
@@ -38,6 +34,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     };
 
     const handleCancel = () => {
+        console.log('Canceling cart and resetting');
         resetCart();
         setShowShippingForm(true);
         setIsReadyForCheckout(false);
@@ -63,7 +60,10 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         }
     };
 
-    const toggleCart = () => setIsCartMinimized(!isCartMinimized);
+    const toggleCart = () => {
+        console.log('Toggling cart view');
+        setIsCartMinimized(!isCartMinimized);
+    };
 
     return (
         <div className="cart">
@@ -79,9 +79,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                             <button onClick={() => removeFromCart(item.id)}>Remove</button>
                         </div>
                     ))}
-                    {showShippingForm && (
-                        <ShippingForm onFormSubmit={handleShippingSubmit} />
-                    )}
+                    {showShippingForm && <ShippingForm onFormSubmit={handleShippingSubmit} />}
                     {isReadyForCheckout && (
                         <>
                             <button onClick={checkout} disabled={!wallet.connected}>
