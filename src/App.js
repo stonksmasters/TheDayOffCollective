@@ -40,9 +40,15 @@ function App() {
                 />
                 <Routes>
                     <Route path="/" element={
-                      <HomePage addToCart={addToCart} />
-                    } />
-                    {/* Other routes */}
+                      <HomePage addToCart={addToCart} 
+                       removeFromCart={removeFromCart} 
+                       resetCart={resetCart} // Ensure this prop is passed down
+                       cartItems={cartItems}
+                     />} 
+                    />
+                    <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
+                    <Route path="/comics" element={<ComingSoon sectionTitle="Comics" />} />
+                    <Route path="/recipes" element={<ComingSoon sectionTitle="Recipes" />} />
                 </Routes>
                 <Footer />
             </div>
