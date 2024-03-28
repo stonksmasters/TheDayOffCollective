@@ -13,28 +13,20 @@ const ShippingForm = ({ onFormSubmit }) => {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormData(prevFormData => {
-            const updatedFormData = { ...prevFormData, [name]: value };
-            console.log('Updating form data:', updatedFormData);
-            return updatedFormData;
-        });
+        setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
         console.log('Form submission attempted with data:', formData);
-
-        // If there's a custom submission logic
+        
+        // Custom submission logic
         if (onFormSubmit) {
+            event.preventDefault(); // Prevent default only if handling form submit in React
             onFormSubmit(formData);
         }
-
-        // Debug: Check if form action is set correctly for Netlify
+        
+        // Debug: Check form action URL
         console.log('Form action URL:', event.target.action);
-
-        // Normally, we don't manually submit the form when using Netlify's form handling,
-        // but you can uncomment the next line if you need to force submission.
-        // event.target.submit();
     };
 
     return (
