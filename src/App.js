@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Wallet from './components/Wallet';
@@ -6,10 +5,10 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProductList from './components/ProductList';
 import Videos from './components/Videos';
+import PromoDeals from './components/PromoDeals'; // Import the new PromoDeals component
 import Marketplace from './components/Marketplace';
-import ComingSoon from './components/ComingSoon'; // Import the ComingSoon component
+import ComingSoon from './components/ComingSoon';
 import AboutUs from './components/AboutUs';
-
 import Footer from './components/Footer';
 import products from './data/products';
 import './App.css';
@@ -23,6 +22,7 @@ const HomePage = ({ addToCart }) => (
         <AboutUs />
         <ProductList products={featuredProducts} addToCart={addToCart} />
         <Videos />
+        <PromoDeals /> {/* Add the PromoDeals component here */}
     </div>
 );
 
@@ -53,6 +53,7 @@ function App() {
             </div>
         </Wallet>
     );
+    
 }
 
 export default App;

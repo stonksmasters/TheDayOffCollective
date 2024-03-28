@@ -1,4 +1,3 @@
-// src/components/ProductList.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ProductItem from './ProductItem';
@@ -6,6 +5,10 @@ import ProductModal from './ProductModal'; // Assuming you have a ProductModal c
 
 const ProductList = ({ products, addToCart }) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
+
+    const handleClose = () => {
+        setSelectedProduct(null); // Reset selectedProduct to close the modal
+    };
 
     return (
         <section className="featured-products">
@@ -15,7 +18,10 @@ const ProductList = ({ products, addToCart }) => {
                     <ProductItem key={product.id} product={product} addToCart={addToCart} onProductClick={setSelectedProduct} />
                 ))}
             </div>
-            <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+            {selectedProduct && (
+                <ProductModal product={selectedProduct} addToCart={addToCart} onClose={handleClose} />
+            )}
+
             <div className="view-all-button-container">
                 <Link to="/marketplace" className="button btn-view-all">View All Products</Link>
             </div>

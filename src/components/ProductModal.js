@@ -1,11 +1,10 @@
 // src/components/ProductModal.js
 import React, { useState } from 'react';
-import App from '../App';
+import '../App.css';
+
 const ProductModal = ({ product, onClose, addToCart }) => {
-    // Declare state hooks at the top level of the component
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
-    // Early return should come after the hook declarations
     if (!product) return null;
 
     const handleAddToCart = () => {
