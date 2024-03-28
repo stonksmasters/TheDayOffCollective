@@ -1,68 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const ShippingForm = ({ onFormSubmit, onFormSuccess }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        discord: '',
-        address: '',
-        city: '',
-        state: '',
-        zipcode: ''
-    });
-
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setFormData(prevFormData => ({ ...prevFormData, [name]: value }));
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log('Form submission attempted with data:', formData);
-    
-        if (onFormSubmit) {
-            onFormSubmit(formData);  // Custom form submission logic, if any
-        }
-
-        // Simulate form submission to Netlify (for example, using an AJAX request)
-        fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(formData).toString()
-        })
-        .then(() => {
-            console.log('Form successfully submitted to Netlify');
-            onFormSuccess(); // Callback function to handle the transition to the review order page
-        })
-        .catch((error) => console.error('Error submitting form to Netlify:', error));
-
-        // Prevent actual form submission to avoid page reload
-        // event.target.submit();
-    };
-
+const ShippingForm = () => {
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <form name="shipping" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="shipping" />
             <p>
-                <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
+                <label>Name: <input type="text" name="name" required /></label>
             </p>
             <p>
-                <label>Email (Optional): <input type="email" name="email" value={formData.email} onChange={handleChange} /></label>
+                <label>Email (Optional): <input type="email" name="email" /></label>
             </p>
             <p>
-                <label>Discord Username (Optional): <input type="text" name="discord" value={formData.discord} onChange={handleChange} /></label>
+                <label>Discord Username (Optional): <input type="text" name="discord" /></label>
             </p>
             <p>
-                <label>Address: <textarea name="address" value={formData.address} onChange={handleChange} required /></label>
+                <label>Address: <textarea name="address" required /></label>
             </p>
             <p>
-                <label>City: <input type="text" name="city" value={formData.city} onChange={handleChange} required /></label>
+                <label>City: <input type="text" name="city" required /></label>
             </p>
             <p>
-                <label>State: <input type="text" name="state" value={formData.state} onChange={handleChange} required /></label>
+                <label>State: <input type="text" name="state" required /></label>
             </p>
             <p>
-                <label>Zip Code: <input type="text" name="zipcode" value={formData.zipcode} onChange={handleChange} required /></label>
+                <label>Zip Code: <input type="text" name="zipcode" required /></label>
             </p>
             <p>
                 <button type="submit">Proceed to Checkout</button>
