@@ -17,17 +17,17 @@ const ShippingForm = ({ onFormSubmit }) => {
     };
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         console.log('Form submission attempted with data:', formData);
-        
-        // Custom submission logic
+    
         if (onFormSubmit) {
-            event.preventDefault(); // Prevent default only if handling form submit in React
             onFormSubmit(formData);
         }
-        
-        // Debug: Check form action URL
-        console.log('Form action URL:', event.target.action);
+    
+        // Manually trigger the form submission to Netlify
+        event.target.submit();
     };
+    
 
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
