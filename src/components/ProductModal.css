@@ -1,0 +1,70 @@
+/* src/components/ProductModal.css */
+.product-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.product-modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+}
+
+.modal-close-button {
+    float: right;
+    font-size: 30px;
+    border: none;
+    background: none;
+}
+
+.product-image-gallery {
+    text-align: center;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+}
+
+.product-details {
+    margin-top: 20px;
+}
+
+.product-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.product-description {
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 20px;
+    color: green;
+    margin-bottom: 20px;
+}
+
+.add-to-cart-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-cart-button:hover {
+    background-color: #0056b3;
+}

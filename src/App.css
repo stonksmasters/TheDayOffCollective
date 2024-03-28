@@ -5,18 +5,24 @@
   --lightest-background: #f1fff2;
   --light-green-background: #b3e9c7;
   --dark-text: #403d39;
-  --border-color: #ccc;
-  --border-light: #eee;
-  --font-family-main: 'Helvetica Neue', sans-serif;
-  --font-family-alt: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-main: "Helvetica Neue", sans-serif;
 }
+::selection {
+  background-color: var(--primary-color);
+  color: var(--lightest-background);
+}
+
+::placeholder {
+  color: var(--secondary-color);
+  opacity: 0.7;
+}
+
 
 body {
   font-family: var(--font-family-main);
   margin: 0;
-  padding: 0;
   background-color: var(--lightest-background);
-  color: var(--primary-color);
+  color: var(--dark-text);
   overflow-x: hidden;
 }
 
@@ -24,14 +30,19 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 20px;
-  position: relative;
 }
 
+/* Product Listing */
 .product-list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+}
+button:disabled {
+  background-color: var(--border-color);
+  color: var(--dark-text);
+  cursor: not-allowed;
 }
 
 .product-item {
@@ -60,6 +71,7 @@ body {
   color: var(--secondary-color);
 }
 
+/* Cart Styles */
 .cart {
   position: fixed;
   right: 20px;
@@ -72,14 +84,13 @@ body {
   z-index: 1000;
   padding: 15px;
   border-radius: 8px;
-  font-family: var(--font-family-alt);
+  font-family: var(--font-family-main);
 }
 
 .cart h2 {
   color: var(--primary-color);
   margin-top: 0;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .cart-item {
@@ -92,6 +103,7 @@ body {
   margin: 5px 0;
 }
 
+/* Buttons */
 button {
   background-color: var(--secondary-color);
   color: var(--lightest-background);
@@ -100,7 +112,7 @@ button {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s, transform 0.1s;
   font-size: 14px;
   width: 100%;
   text-align: center;
@@ -108,6 +120,7 @@ button {
 
 button:hover {
   background-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .toggle-cart-button {
@@ -127,26 +140,24 @@ button:hover {
   background-color: var(--primary-color);
 }
 
+/* Headers */
 .primary-header {
   text-align: center;
   padding: 20px 0;
+
   background-color: var(--secondary-color);
   color: var(--lightest-background);
-  border: 2px solid #6b34b7;
- 
 }
 
 .secondary-header {
   background-color: var(--primary-color);
-  border: solid 2px #6b34b7;
   display: flex;
-  align-items: center; /* Vertically centers the flex items */
-  justify-content: flex-start; /* Aligns items to the start of the flex container */
+  align-items: center;
+  justify-content: flex-start;
   padding: 10px;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  border: 2px solid #6b34b7;
 }
 
 .wallet-button {
@@ -154,17 +165,15 @@ button:hover {
   padding: 5px;
   margin-bottom: 10px;
   text-align: center;
-  flex-shrink: 0;
-  margin-right: 20px;
-  box-sizing: border-box; /* Ensures padding and border are included in the width */
-  flex-grow: 1; /* Allows the button to grow to fill the space as needed */
-  max-width: calc(100% - 20px); /* Limits the width to prevent overflow */
+  flex-grow: 1;
+  max-width: calc(100% - 20px);
 }
 
+/* Navigation Links */
 .nav-links {
-  flex-grow: 1; /* Allows navigation links to fill the remaining space */
+  flex-grow: 1;
   display: flex;
-  flex-direction: column; /* Change this to row for a horizontal layout */
+  flex-direction: column;
   width: 100%;
   padding: 0;
 }
@@ -176,21 +185,10 @@ button:hover {
   padding: 10px;
   display: block;
   text-decoration: none;
-  border:solid 2px #6b34b7;
   margin: 2px 0;
 }
 
-
-
-
-
-
-.cart-button {
-  display: flex;
-  align-items: center;
-}
-
-
+/* Hero Section */
 .hero-section {
   height: 100vh;
   background-size: cover;
@@ -199,101 +197,77 @@ button:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #8267c6; /* Medium purple */
+  background-color: var(--primary-color);
 }
 
 .hero-content {
-  color: #f1fff2;
+  color: var(--lightest-background);
   text-align: center;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
   border-radius: 10px;
 }
 
+/* Video Container */
 .video-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 50px;
-}
-
-.video {
-  background-color: var(--lightest-background);
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
-  width: calc(25% - 20px); /* Four videos per row with spacing */
-}
-
-.video:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
-}
-
-.video img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0; /* Only round the top corners */
-}
-
-.video p {
-  padding: 15px;
-  margin: 0;
-  background-color: var(--light-green);
-  color: var(--dark-text);
-  border-radius: 0 0 10px 10px; /* Only round the bottom corners */
-  font-size: 1em;
-}
-
-.video-modal-backdrop {
-  display: flex;
+  flex-direction: column;
   align-items: center;
+}
+
+.video-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.video-modal-content {
-  width: 90%; /* Limit width to 90% of the viewport width */
-  max-width: 560px; /* Maximum width of the modal */
+.video-thumbnail {
   position: relative;
-  background: var(--lightest-background);
-  padding: 20px;
-  border-radius: 10px;
-}
-
-.video-modal-close {
-  
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  color: var(--secondary-color);
-  font-size: 1.5em;
   cursor: pointer;
+  transition: transform 0.2s;
 }
 
-/* Make sure the iframe is responsive */
-.video-modal-content iframe {
-  width: 100%;
-  height: 315px; /* Fixed height for now, could be made responsive */
-  border: none;
+.video-thumbnail:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.video-thumbnail img {
+  width: 200px;
+  height: 150px;
   border-radius: 5px;
 }
 
+.video-title-overlay {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.7);
+  clip-path: polygon(30% 20%, 30% 80%, 70% 50%);
+  border-radius: 50%;
+}
+
+/* Footer Styles */
 .footer {
-  background-color: #8267c6;
-  color: #f1fff2;
+  background-color: var(--primary-color);
+  color: var(--lightest-background);
   padding: 40px 0;
   font-size: 16px;
 }
@@ -307,13 +281,8 @@ button:hover {
   padding: 0 20px;
 }
 
-.footer-section {
-  margin: 10px;
-}
-
 .footer-section h4 {
   margin-bottom: 15px;
-  color: #f1fff2;
 }
 
 .social-icons {
@@ -322,120 +291,99 @@ button:hover {
   padding: 0;
 }
 
-.social-icons li {
-  margin: 0 10px;
-}
-
 .social-icons a {
-  display: inline-block;
-  color: #f1fff2;
-  text-decoration: none;
+  color: var(--lightest-background);
   transition: color 0.3s;
 }
 
 .social-icons a:hover {
-  color: #b3e9c7;
+  color: var(--light-green);
 }
 
 .footer-bottom {
   text-align: center;
   margin-top: 40px;
-  border-top: 1px solid #ccc6ba; /* Lighter border for subtle contrast */
+  border-top: 1px solid #ccc6ba;
   padding-top: 20px;
-  color: #f1fff2; /* Lightest color for text */
 }
 
-/* ShippingForm CSS */
+/* Shipping Form Styles */
 form[name="shipping"] {
   max-width: 500px;
   margin: auto;
   padding: 20px;
-  background-color: #c3f8cc; /* Light green for form background */
+  background-color: var(--light-green);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-family-main);
 }
 
-form[name="shipping"] p {
-  margin: 0;
-  padding: 10px 0;
-  color: #403d39; /* Dark color for text */
-}
-
+form[name="shipping"] p,
 form[name="shipping"] label {
-  display: block;
-  margin-bottom: 5px;
-  color: #252423; /* Dark color for label text */
-  font-weight: bold;
+  color: var(--dark-text);
 }
 
 form[name="shipping"] input,
 form[name="shipping"] textarea {
   width: 100%;
   padding: 8px;
-  margin: 5px 0 20px 0;
-  border: 1px solid #8267c6; /* Medium purple for border */
+  margin-bottom: 20px;
+  border: 1px solid var(--primary-color);
   border-radius: 4px;
-  box-sizing: border-box;
 }
 
 form[name="shipping"] button {
-  width: 100%;
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
   padding: 10px;
-  background-color: #6b34b7; /* Dark purple for buttons */
-  color: #f1fff2; /* Lightest color for button text */
-  border: none;
+  width: 100%;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 16px;
   transition: background-color 0.3s;
 }
 
 form[name="shipping"] button:hover {
-  background-color: #8267c6; /* Lighter purple for button hover */
+  background-color: var(--primary-color);
 }
 
-/* ReviewOrder CSS */
+/* Review Order Styles */
 .review-order {
   max-width: 600px;
   margin: auto;
   padding: 20px;
-  background-color: #b3e9c7; /* Light green for review order background */
+  background-color: var(--light-green-background);
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-family-main);
 }
 
 .review-order h2 {
-  color: #6b34b7; /* Dark purple for headings */
-  text-align: center;
+  color: var(--secondary-color);
   margin-bottom: 20px;
 }
 
 .review-order ul {
   list-style: none;
-  padding: 0;
   margin-bottom: 20px;
 }
 
 .review-order li {
-  background-color: #c3f8cc; /* Light green for list items */
-  margin: 5px 0;
+  background-color: var(--light-green);
   padding: 10px;
   border-radius: 4px;
+  margin-bottom: 10px;
 }
 
 .review-order p {
+  color: var(--dark-text);
   font-size: 18px;
   font-weight: bold;
-  text-align: center;
-  color: #403d39; /* Dark text color for paragraphs */
   margin-bottom: 20px;
 }
 
 .review-order button {
-  background-color: #6b34b7; /* Dark purple for buttons */
-  color: #f1fff2; /* Lightest color for button text */
+  background-color: var(--secondary-color);
+  color: var(--lightest-background);
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
@@ -444,19 +392,18 @@ form[name="shipping"] button:hover {
 }
 
 .review-order button:hover {
-  background-color: #8267c6; /* Lighter purple for button hover */
+  background-color: var(--primary-color);
 }
-/* Add this CSS to your App.css or a specific CSS file for comic styles */
 
+/* Comic Item Styles */
 .comic-item {
   background-color: var(--light-green);
   border: none;
   border-radius: 10px;
   padding: 15px;
-  width: 250px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
-  margin: 10px; /* Add some margin to separate comic items */
+  margin: 10px;
 }
 
 .comic-item:hover {
@@ -470,24 +417,17 @@ form[name="shipping"] button:hover {
   border-radius: 10px;
 }
 
-.comic-item h2 { /* Assuming h2 is used for comic titles */
-  margin: 15px 0 10px;
+.comic-item h2 {
+  margin: 15px 0;
   color: var(--secondary-color);
 }
 
-.comic-item p {
-  color: var(--dark-gray); /* Example color, adjust as needed */
-}
-/* Add this CSS to your App.css or a specific CSS file for recipes styles */
-
-/* Add this CSS to your App.css or a specific CSS file for recipes styles */
-
+/* Recipe Item Styles */
 .recipe-item {
   background-color: var(--light-green);
   border: none;
   border-radius: 10px;
   padding: 15px;
-  width: 250px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s;
   margin: 10px;
@@ -505,13 +445,11 @@ form[name="shipping"] button:hover {
 }
 
 .recipe-item h3 {
-  margin: 15px 0 10px;
+  margin: 15px 0;
   color: var(--secondary-color);
 }
 
-.recipe-item p {
-  color: var(--dark-gray);
-}
+/* Hero Sections Styles */
 .hero-sections {
   height: 300px;
   position: relative;
@@ -524,6 +462,8 @@ form[name="shipping"] button:hover {
   object-fit: cover;
   transition: opacity 0.5s ease-in-out;
 }
+
+/* Coming Soon Content Styles */
 .coming-soon-content {
   text-align: center;
   padding: 20px;
@@ -533,69 +473,60 @@ form[name="shipping"] button:hover {
   font-size: 20px;
   color: #333;
 }
-/* Add this CSS to your App.css or a specific CSS file for AboutUs styles */
 
+/* About Us Styles */
 .about-us {
   text-align: center;
   padding: 60px 20px;
   background-color: var(--lightest-background);
   color: var(--dark-text);
-  line-height: 1.6;
-  font-family: var(--font-family-main);
 }
 
 .about-us-hero h1 {
   font-size: 2.8em;
   color: var(--primary-color);
-  margin-bottom: 0.5em;
 }
 
 .about-us-hero p {
   font-size: 1.1em;
-  color: var(--dark-text);
   max-width: 800px;
-  margin: auto; /* Centers the paragraph in the div */
+  margin: auto;
 }
 
+/* Roadmap Styles */
 .roadmap {
   margin-top: 80px;
-  background-color: transparent;
 }
 
 .roadmap h2 {
   font-size: 2.2em;
-  margin-bottom: 1em;
   color: var(--primary-color);
 }
 
 .roadmap-list {
   list-style: none;
-  padding: 0;
-  max-width: 800px; /* Setting a max-width for readability */
-  margin: auto; /* Centers the list in the section */
+  max-width: 800px;
+  margin: auto;
 }
 
 .roadmap-list h3 {
   font-size: 1.8em;
   color: var(--dark-text);
-  margin: 2em 0 1em; /* More vertical space around section titles for clarity */
 }
 
 .roadmap-list p {
   font-size: 1em;
-  color: var(--dark-text);
   margin-bottom: 1em;
 }
 
 .roadmap-list li {
-  margin-bottom: 1em;
-  background-color: var(--lightest-background); /* A very light background for the list items */
+  background-color: var(--lightest-background);
   padding: 2em;
   border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05); /* A very subtle shadow */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
 }
-/* Add this to your App.css */
-/* ProductList component styles */
+
+/* Featured Products Styles */
 .featured-products {
   text-align: center;
   padding: 40px 20px;
@@ -606,7 +537,6 @@ form[name="shipping"] button:hover {
 
 .featured-products-title {
   color: var(--secondary-color);
-  font-family: var(--font-family-main);
   margin-bottom: 30px;
   font-size: 1.75em;
 }
@@ -615,25 +545,109 @@ form[name="shipping"] button:hover {
   margin-top: 30px;
 }
 
-/* General button styles */
-.button {
-  background-color: var(--secondary-color);
-  color: var(--lightest-background);
+/* Product Modal Styles */
+.product-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.product-modal {
+  background: white;
+  border-radius: 10px;
+  width: auto;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.modal-close-button:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.1);
+}
+
+.product-image-gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 450px;
+  display: block;
+  margin: auto;
+  transition: transform 0.3s ease-in-out;
+}
+
+.gallery-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
   padding: 10px 15px;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+
+.product-details {
+  padding: 20px;
+  text-align: left;
+}
+
+.product-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.product-description {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.product-price {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.add-to-cart-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  text-decoration: none;
-  display: inline-block; /* So the width fits content */
-  font-family: var(--font-family-alt);
-  font-size: 1em;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
-.button:hover, .button:active {
-  background-color: var(--primary-color);
+.add-to-cart-button:hover {
+  background-color: #0056b3;
 }
-
 
 
 /* Existing CSS styles */
@@ -644,16 +658,18 @@ form[name="shipping"] button:hover {
 
 @media (max-width: 768px) {
   .App {
-      padding: 10px;
+    padding: 10px;
   }
 
   .product-list {
-      gap: 10px;
+    gap: 10px;
   }
 
-  .product-item, .comic-item, .recipe-item {
-      width: 100%; /* Full width for better visibility on small screens */
-      margin: 5px;
+  .product-item,
+  .comic-item,
+  .recipe-item {
+    width: 100%;
+    margin: 5px;
   }
 
   .cart {
@@ -664,134 +680,119 @@ form[name="shipping"] button:hover {
     max-height: 100vh;
     overflow-y: auto;
     position: fixed;
-    z-index: 1050; /* High z-index to ensure it's above other content */
-    padding: 20px; /* Add padding for internal spacing */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Soft shadow for depth */
-    background-color: var(--light-green-background); /* Consistent background with the theme */
-    border-bottom: 1px solid var(--border-color); /* Define a border for the bottom edge */
-    box-sizing: border-box; /* Include padding in width */
+    z-index: 1050;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: var(--light-green-background);
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
   }
-  
+
   .cart h2 {
-    font-size: 1.25em; /* Increase font size for headers */
+    font-size: 1.25em;
     margin-top: 0;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color); /* A border to separate the header */
-    color: var(--dark-text); /* Use a dark color for better readability */
+    border-bottom: 1px solid var(--border-color);
   }
-  
+
   .cart-item {
-    font-size: 1em; /* Adjust font size for items */
+    font-size: 1em;
     margin-bottom: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-light); /* Separation between items */
+    border-bottom: 1px solid var(--border-light);
   }
-  
+
   .cart-item p {
     margin: 5px 0;
-    line-height: 1.5; /* Improved line height for readability */
+    line-height: 1.5;
   }
-  
+
   button {
-    background-color: var(--secondary-color);
-    color: var(--lightest-background);
-    padding: 12px 15px; /* Larger padding for a touch-friendly button */
-    margin: 10px 0; /* Space out buttons */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em; /* Larger font size for readability */
-    width: auto; /* Auto width for button flexibility */
-    text-align: center;
-    display: block; /* Ensure buttons are block level for full width tap area */
+    padding: 12px 15px;
+    margin: 10px 0;
+    font-size: 1em;
+    width: auto;
+    display: block;
   }
-  
 
   .toggle-cart-button {
-      top: 60px; /* Adjust position to avoid overlap with other elements */
+    top: 60px;
   }
 
-  .primary-header{
-    margin-top: 80px; /* Adjust this value based on the actual height of your cart */
+  .primary-header {
+    margin-top: 90px;
     padding: 10px 0;
-  } .secondary-header {
-      padding: 10px 0; /* Reduce padding to save space */
+  }
+  .secondary-header {
+    padding: 10px 0;
   }
 
   .nav-links a {
-      padding: 8px; /* Reduce padding for link items to fit more on screen */
+    padding: 8px;
   }
 
   .hero-section {
-    padding: 20px; /* Adjust padding to provide consistent spacing */
-    min-height: 100vh; /* Minimum height is the full viewport height */
+    padding: 20px;
+    min-height: 100vh;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-  }
-
-  .video {
-    width: calc(50% - 20px); /* Two videos per row with spacing on tablets */
-  }
-
-  .video-modal-content iframe {
-    height: auto; /* Adjust height on smaller screens */
-  }
-  .video-modal-content {
-    height: auto; /* Adjust height on smaller screens */
-    width: 95%; /* Increase width to 95% on smaller screens for better visibility */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
   .footer {
-      padding: 20px 0; /* Reduce footer padding on small screens */
+    padding: 20px 0;
   }
 
   .footer-content {
-      flex-direction: column;
+    flex-direction: column;
   }
 
   .footer-section {
-      margin-bottom: 20px; /* Add more space between footer sections */
+    margin-bottom: 20px;
   }
 
-  form[name="shipping"], .review-order {
-      padding: 15px; /* Reduce padding for form elements */
-      max-width: 100%; /* Full width for forms */
+  form[name="shipping"],
+  .review-order {
+    padding: 15px;
+    max-width: 100%;
   }
+
   .featured-products-title {
-    font-size: 1.5em; /* Slightly smaller title on smaller screens */
+    font-size: 1.5em;
   }
+
   .button {
-    padding: 8px 12px; /* Slightly smaller padding on buttons */
-    font-size: 0.9em; /* Slightly smaller font size for text inside buttons */
+    padding: 8px 12px;
+    font-size: 0.9em;
   }
 }
 
-
-
 @media (max-width: 480px) {
-  .product-item, .comic-item, .recipe-item, .video {
-      margin: 0 auto; /* Center these items on very small screens */
-      max-width: 90%; /* Slightly reduce width for screen edge spacing */
+  .product-item,
+  .comic-item,
+  .recipe-item {
+    max-width: 90%;
+    margin: 0 auto;
   }
 
   .nav-links a {
-      font-size: 14px; /* Reduce font size for better readability */
+    font-size: 14px;
   }
 
-  .cart-button, button {
-      padding: 8px 10px; /* Reduce button padding for more space */
-      font-size: 12px; /* Smaller font size for text in buttons */
+  .cart-button,
+  button {
+    padding: 8px 10px;
+    font-size: 12px;
   }
 
-  .hero-content, .video p, .footer-section h4 {
-      font-size: 14px; /* Reduce font size for consistent readability */
+  .hero-content,
+  .video p,
+  .footer-section h4 {
+    font-size: 14px;
   }
 
   .footer-bottom {
-      font-size: 12px; /* Smaller font size for footer bottom text */
+    font-size: 12px;
   }
 }
-
