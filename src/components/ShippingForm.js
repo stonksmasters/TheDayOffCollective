@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ShippingForm = ({ onFormSubmit }) => {
+const ShippingForm = ({ onFormSubmit, onFormSuccess }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -21,17 +21,28 @@ const ShippingForm = ({ onFormSubmit }) => {
         console.log('Form submission attempted with data:', formData);
     
         if (onFormSubmit) {
-            onFormSubmit(formData);
+            onFormSubmit(formData);  // Custom form submission logic, if any
         }
-    
-        // Manually trigger the form submission to Netlify
-        event.target.submit();
+
+        // Simulate form submission to Netlify (for example, using an AJAX request)
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+            console.log('Form successfully submitted to Netlify');
+            onFormSuccess(); // Callback function to handle the transition to the review order page
+        })
+        .catch((error) => console.error('Error submitting form to Netlify:', error));
+
+        // Prevent actual form submission to avoid page reload
+        // event.target.submit();
     };
-    
 
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-        <input type="hidden" name="form-name" value="shipping" />
+            <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" value={formData.name} onChange={handleChange} required /></label>
             </p>
