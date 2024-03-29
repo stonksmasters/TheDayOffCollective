@@ -3,6 +3,7 @@ import React from 'react';
 const ShippingForm = () => {
     return (
         <form name="shipping" method="POST" data-netlify="true">
+        
             <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" required /></label>

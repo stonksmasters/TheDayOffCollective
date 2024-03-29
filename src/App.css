@@ -653,22 +653,29 @@ form[name="shipping"] button:hover {
 /* PromoDeals Section to match Hero Section */
 /* App.css or PromoDeals.css */
 .promo-deals-section {
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
+  background-size: contain; /* Ensure the entire image is visible */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-position: center; /* Center the background image */
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100vh; /* Ensure it takes at least the viewport height */
+  width: 100%; /* Ensure it takes the full width */
+  overflow: hidden; /* Hide any overflow */
 }
 
 .promo-deals-content {
   color: var(--lightest-background);
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
   padding: 20px;
   border-radius: 10px;
+  max-width: 60%; /* Limit the width of the content to keep it readable */
+  margin: auto; /* Center the content area */
 }
+
+
 
 
 
@@ -754,7 +761,7 @@ form[name="shipping"] button:hover {
     padding: 8px;
   }
 
-  .hero-section {
+  .hero-section, .promo-deals-section {
     padding: 20px;
     min-height: 100vh;
     display: flex;
@@ -805,7 +812,21 @@ form[name="shipping"] button:hover {
     padding: 8px 12px;
     font-size: 0.9em;
   }
+  .promo-deals-section {
+    background-size: contain; /* Adjust background size to ensure the whole image fits */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    height: auto; /* Adjust height to maintain image aspect ratio */
+    min-height: 50vh; /* Set a minimum height to ensure visibility of the section */
+  }
+
+  .promo-deals-content {
+    padding: 15px; /* Reduce padding to fit smaller screens */
+    max-width: 100%; /* Allow the content to fill the container */
+  }
 }
+
+
+
 
 @media (max-width: 480px) {
   .product-item,
@@ -834,5 +855,12 @@ form[name="shipping"] button:hover {
 
   .footer-bottom {
     font-size: 12px;
+  }
+  .promo-deals-section {
+    min-height: 30vh; /* Further reduce height for very small devices */
+  }
+
+  .promo-deals-content {
+    font-size: 14px; /* Reduce font size for readability on small devices */
   }
 }
