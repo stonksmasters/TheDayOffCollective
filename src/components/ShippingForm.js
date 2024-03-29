@@ -1,8 +1,13 @@
 import React from 'react';
 
+const handleSubmit = (event) => {
+    event.preventDefault(); // Stop the form from submitting
+    console.log("Form data:", new FormData(event.target));
+};
+
 const ShippingForm = () => {
     return (
-        <form name="shipping" method="POST" data-netlify="true">
+        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
         
             <input type="hidden" name="form-name" value="shipping" />
             <p>
