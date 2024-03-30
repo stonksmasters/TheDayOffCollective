@@ -28,17 +28,18 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         return Object.values(itemMap);
     };
 
-    const handleShippingSubmit = (data) => {
-        console.log('[Cart] Shipping Data submitted:', data);
-        setFormData(data); // Store form data for later submission
+    const handleShippingSubmit = (event) => {
+        event.preventDefault();
+        const form = new FormData(event.target);
+        console.log('[Cart] Shipping Data submitted:', form);
+        setFormData(form);
         setShowShippingForm(false);
         setIsReadyForCheckout(true);
     };
 
-    const handleSubmitForm = () => {
-        // Logic to submit form data goes here
+    const handleSubmitForm = async () => {
         console.log('[Cart] Submitting form with data:', formData);
-        // Submit form data to your backend or desired endpoint
+        // Here you would typically submit the formData to your backend or Netlify's endpoint
     };
 
     const handleCheckoutConfirmation = async () => {
@@ -49,8 +50,12 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
 
             try {
                 console.log('[Cart] Attempting to send transaction');
-                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems, handleSubmitForm);
+                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
                 console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
+                
+                // Form submission logic after transaction success
+                await handleSubmitForm();
+                
                 resetCart();
                 setShowShippingForm(true);
                 setIsReadyForCheckout(false);

@@ -1,13 +1,8 @@
 import React from 'react';
 
 const ShippingForm = ({ onFormSubmit }) => {
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        onFormSubmit(formData); // Pass the form data back to the Cart component
-    };
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <form name="shipping" method="POST" onSubmit={(event) => onFormSubmit(event)}>
             <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" required /></label>
