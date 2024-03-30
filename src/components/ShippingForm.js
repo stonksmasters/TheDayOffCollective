@@ -3,8 +3,16 @@ import React from 'react';
 const ShippingForm = ({ onFormSubmit }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
+        
+        // Collect form data using React state or context
         const formData = new FormData(event.target);
         onFormSubmit(formData); // Pass the form data back to the Cart component
+
+        // Find the hidden form and submit it to Netlify
+        const hiddenForm = document.querySelector('form[name="shipping"]');
+        if (hiddenForm) {
+            hiddenForm.submit();
+        }
     };
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
