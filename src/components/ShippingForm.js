@@ -1,22 +1,11 @@
 import React from 'react';
 
-const handleSubmit = (event) => {
-    event.preventDefault(); // Stop the form from submitting
-
-    const formData = new FormData(event.target);
-    console.log("Form data:", formData);
-
-    // Perform the form submission here, for example, using fetch API
-    fetch('/', {
-        method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-    })
-    .then(() => console.log("Form successfully submitted"))
-    .catch((error) => alert(error));
-};
-
-const ShippingForm = () => {
+const ShippingForm = ({ onFormSubmit }) => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        onFormSubmit(formData); // Pass the form data back to the Cart component
+    };
     return (
         <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
             <input type="hidden" name="form-name" value="shipping" />

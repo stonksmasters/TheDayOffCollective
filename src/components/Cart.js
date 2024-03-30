@@ -27,21 +27,16 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         return Object.values(itemMap);
     };
 
-    const handleShippingSubmit = (data) => {
-        console.log('Shipping Data:', data);
+    const handleShippingSubmit = (formData) => {
+        console.log('Shipping Data:', formData);
         setShowShippingForm(false);
         setIsReadyForCheckout(true);
+        // Store formData for later submission
     };
 
-    const handleCancel = () => {
-        console.log('Canceling cart and resetting');
-        resetCart();
-        setShowShippingForm(true);
-        setIsReadyForCheckout(false);
-    };
+    const handleCheckoutConfirmation = async () => {
+        console.log("[Cart] Final Checkout initiated");
 
-    const checkout = async () => {
-        console.log("[Cart] Checkout initiated");
         if (wallet.connected && cartItems.length > 0) {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
             console.log(`[Cart] Total amount for checkout: ${totalAmount} SOL`);
@@ -52,12 +47,21 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                 resetCart();
                 setShowShippingForm(true);
                 setIsReadyForCheckout(false);
+
+                // Here, you would actually submit the stored form data from `handleShippingSubmit`
             } catch (error) {
                 console.error("[Cart] Transaction failed:", error);
             }
         } else {
             console.log("[Cart] Wallet not connected or cart is empty");
         }
+    };
+
+    const handleCancel = () => {
+        console.log('Canceling cart and resetting');
+        resetCart();
+        setShowShippingForm(true);
+        setIsReadyForCheckout(false);
     };
 
     const toggleCart = () => {
@@ -82,7 +86,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                     {showShippingForm && <ShippingForm onFormSubmit={handleShippingSubmit} />}
                     {isReadyForCheckout && (
                         <>
-                            <button onClick={checkout} disabled={!wallet.connected}>
+                            <button onClick={handleCheckoutConfirmation} disabled={!wallet.connected}>
                                 Confirm Checkout
                             </button>
                             <button onClick={handleCancel}>Cancel</button>

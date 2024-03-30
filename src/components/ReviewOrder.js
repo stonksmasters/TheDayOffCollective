@@ -1,7 +1,14 @@
 import React from 'react';
 import './reviewOrder.css';
-const ReviewOrder = ({ items, onConfirm, onCancel }) => {
+
+const ReviewOrder = ({ items, onConfirm, onCancel, formData }) => {
     const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
+
+    const handleConfirm = () => {
+        console.log("Confirming order with shipping data:", formData);
+        // Process the form data here (e.g., submit to the server)
+        onConfirm(formData);
+    };
 
     return (
         <div className="review-order">
@@ -14,7 +21,7 @@ const ReviewOrder = ({ items, onConfirm, onCancel }) => {
                 ))}
             </ul>
             <p>Total: {totalAmount} SOL</p>
-            <button onClick={onConfirm}>Confirm Purchase</button>
+            <button onClick={handleConfirm}>Confirm Purchase</button>
             <button onClick={onCancel}>Cancel</button>
         </div>
     );
