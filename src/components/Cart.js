@@ -8,11 +8,10 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const [cartItems, setCartItems] = useState([]);
     const [showShippingForm, setShowShippingForm] = useState(true);
     const [isReadyForCheckout, setIsReadyForCheckout] = useState(false);
-    const [formData, setFormData] = useState(null); // To store shipping form data
     const wallet = useWallet();
 
     useEffect(() => {
-        console.log('[Cart] Cart items updated:', items);
+        console.log('Cart items updated:', items);
         setCartItems(mergeItemsWithQuantities(items));
     }, [items]);
 
@@ -28,55 +27,46 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         return Object.values(itemMap);
     };
 
-    const handleShippingSubmit = (event) => {
-        event.preventDefault();
-        const form = new FormData(event.target);
-        console.log('[Cart] Shipping Data submitted:', form);
-        setFormData(form);
+    const handleShippingSubmit = (formData) => {
+        console.log('Shipping Data:', formData);
         setShowShippingForm(false);
         setIsReadyForCheckout(true);
-    };
-
-    const handleSubmitForm = async () => {
-        console.log('[Cart] Submitting form with data:', formData);
-        // Here you would typically submit the formData to your backend or Netlify's endpoint
+        // Store formData for later submission
     };
 
     const handleCheckoutConfirmation = async () => {
-        console.log('[Cart] Checkout confirmation initiated');
+        console.log("[Cart] Final Checkout initiated");
+
         if (wallet.connected && cartItems.length > 0) {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            console.log(`[Cart] Total checkout amount: ${totalAmount} SOL`);
+            console.log(`[Cart] Total amount for checkout: ${totalAmount} SOL`);
 
             try {
-                console.log('[Cart] Attempting to send transaction');
                 const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
-                console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
-                
-                // Form submission logic after transaction success
-                await handleSubmitForm();
-                
+                console.log(`[Cart] Transaction successful: ${transactionSignature}`);
                 resetCart();
                 setShowShippingForm(true);
                 setIsReadyForCheckout(false);
+
+                // Here, you would actually submit the stored form data from `handleShippingSubmit`
             } catch (error) {
-                console.error('[Cart] Transaction failed:', error);
+                console.error("[Cart] Transaction failed:", error);
             }
         } else {
-            console.log('[Cart] Checkout attempted with no wallet connected or empty cart');
+            console.log("[Cart] Wallet not connected or cart is empty");
         }
     };
 
     const handleCancel = () => {
-        console.log('[Cart] Checkout cancelled and cart reset');
+        console.log('Canceling cart and resetting');
         resetCart();
         setShowShippingForm(true);
         setIsReadyForCheckout(false);
     };
 
     const toggleCart = () => {
+        console.log('Toggling cart view');
         setIsCartMinimized(!isCartMinimized);
-        console.log('[Cart] Cart view toggled:', isCartMinimized ? 'Minimized' : 'Expanded');
     };
 
     return (
