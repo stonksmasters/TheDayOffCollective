@@ -11,7 +11,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const wallet = useWallet();
 
     useEffect(() => {
-        console.log('Cart items updated:', items);
+        console.log('[Cart] Cart items updated:', items);
         setCartItems(mergeItemsWithQuantities(items));
     }, [items]);
 
@@ -28,45 +28,42 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     };
 
     const handleShippingSubmit = (formData) => {
-        console.log('Shipping Data:', formData);
+        console.log('[Cart] Shipping Data submitted:', formData);
         setShowShippingForm(false);
         setIsReadyForCheckout(true);
-        // Store formData for later submission
     };
 
     const handleCheckoutConfirmation = async () => {
-        console.log("[Cart] Final Checkout initiated");
-
+        console.log('[Cart] Checkout confirmation initiated');
         if (wallet.connected && cartItems.length > 0) {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            console.log(`[Cart] Total amount for checkout: ${totalAmount} SOL`);
+            console.log(`[Cart] Total checkout amount: ${totalAmount} SOL`);
 
             try {
+                console.log('[Cart] Attempting to send transaction');
                 const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
-                console.log(`[Cart] Transaction successful: ${transactionSignature}`);
+                console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
                 resetCart();
                 setShowShippingForm(true);
                 setIsReadyForCheckout(false);
-
-                // Here, you would actually submit the stored form data from `handleShippingSubmit`
             } catch (error) {
-                console.error("[Cart] Transaction failed:", error);
+                console.error('[Cart] Transaction failed:', error);
             }
         } else {
-            console.log("[Cart] Wallet not connected or cart is empty");
+            console.log('[Cart] Checkout attempted with no wallet connected or empty cart');
         }
     };
 
     const handleCancel = () => {
-        console.log('Canceling cart and resetting');
+        console.log('[Cart] Checkout cancelled and cart reset');
         resetCart();
         setShowShippingForm(true);
         setIsReadyForCheckout(false);
     };
 
     const toggleCart = () => {
-        console.log('Toggling cart view');
         setIsCartMinimized(!isCartMinimized);
+        console.log('[Cart] Cart view toggled:', isCartMinimized ? 'Minimized' : 'Expanded');
     };
 
     return (
