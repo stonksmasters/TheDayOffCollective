@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import ShippingForm from './ShippingForm';
+import ReviewOrder from './ReviewOrder'; // Import the ReviewOrder component
 import { useWallet } from '@solana/wallet-adapter-react';
 import { sendTransaction } from './solanaTransactions';
 
 const Cart = ({ items, removeFromCart, resetCart }) => {
     const [isCartMinimized, setIsCartMinimized] = useState(true);
     const [cartItems, setCartItems] = useState([]);
-    const [showShippingForm, setShowShippingForm] = useState(true);
-    const [isReadyForCheckout, setIsReadyForCheckout] = useState(false);
+    const [checkoutStage, setCheckoutStage] = useState('viewCart'); // Manage checkout stage
+    const [formData, setFormData] = useState(null);
     const wallet = useWallet();
 
     useEffect(() => {
-        console.log('Cart items updated:', items);
         setCartItems(mergeItemsWithQuantities(items));
     }, [items]);
 
@@ -28,50 +28,50 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     };
 
     const handleShippingSubmit = (formData) => {
-        console.log('Shipping Data:', formData);
-        setShowShippingForm(false);
-        setIsReadyForCheckout(true);
-        // Store formData for later submission
+        setFormData(formData);
+        setCheckoutStage('reviewOrder'); // Move to review order stage
+    };
+
+    const handleSubmitForm = async () => {
+        console.log('[Cart] Submitting form with data:', formData);
+        // Submit the formData to your backend or another service
     };
 
     const handleCheckoutConfirmation = async () => {
-        console.log("[Cart] Final Checkout initiated");
-
+        console.log('[Cart] Checkout confirmation initiated');
         if (wallet.connected && cartItems.length > 0) {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            console.log(`[Cart] Total amount for checkout: ${totalAmount} SOL`);
+            console.log(`[Cart] Total checkout amount: ${totalAmount} SOL`);
 
             try {
                 const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
-                console.log(`[Cart] Transaction successful: ${transactionSignature}`);
+                console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
+                
+                await handleSubmitForm();
                 resetCart();
-                setShowShippingForm(true);
-                setIsReadyForCheckout(false);
-
-                // Here, you would actually submit the stored form data from `handleShippingSubmit`
+                setCheckoutStage('viewCart'); // Reset to view cart stage after checkout
             } catch (error) {
-                console.error("[Cart] Transaction failed:", error);
+                console.error('[Cart] Transaction failed:', error);
             }
         } else {
-            console.log("[Cart] Wallet not connected or cart is empty");
+            console.log('[Cart] Checkout attempted with no wallet connected or empty cart');
         }
     };
 
     const handleCancel = () => {
-        console.log('Canceling cart and resetting');
         resetCart();
-        setShowShippingForm(true);
-        setIsReadyForCheckout(false);
+        setCheckoutStage('viewCart'); // Reset to view cart stage
     };
 
     const toggleCart = () => {
-        console.log('Toggling cart view');
         setIsCartMinimized(!isCartMinimized);
     };
 
     return (
         <div className="cart">
-            <button onClick={toggleCart}>{isCartMinimized ? `Expand Cart (${cartItems.reduce((acc, item) => acc + item.quantity, 0)})` : 'Minimize Cart'}</button>
+            <button onClick={toggleCart}>
+                {isCartMinimized ? `Expand Cart (${cartItems.length})` : 'Minimize Cart'}
+            </button>
             {!isCartMinimized && (
                 <>
                     <h2>Cart</h2>
@@ -83,14 +83,11 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                             <button onClick={() => removeFromCart(item.id)}>Remove</button>
                         </div>
                     ))}
-                    {showShippingForm && <ShippingForm onFormSubmit={handleShippingSubmit} />}
-                    {isReadyForCheckout && (
-                        <>
-                            <button onClick={handleCheckoutConfirmation} disabled={!wallet.connected}>
-                                Confirm Checkout
-                            </button>
-                            <button onClick={handleCancel}>Cancel</button>
-                        </>
+                    {checkoutStage === 'viewCart' && cartItems.length > 0 && (
+                        <ShippingForm onFormSubmit={handleShippingSubmit} />
+                    )}
+                    {checkoutStage === 'reviewOrder' && (
+                        <ReviewOrder items={cartItems} onConfirm={handleCheckoutConfirmation} onCancel={handleCancel} formData={formData} />
                     )}
                 </>
             )}
