@@ -8,6 +8,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const [cartItems, setCartItems] = useState([]);
     const [showShippingForm, setShowShippingForm] = useState(true);
     const [isReadyForCheckout, setIsReadyForCheckout] = useState(false);
+    const [formData, setFormData] = useState(null); // To store shipping form data
     const wallet = useWallet();
 
     useEffect(() => {
@@ -27,10 +28,17 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         return Object.values(itemMap);
     };
 
-    const handleShippingSubmit = (formData) => {
-        console.log('[Cart] Shipping Data submitted:', formData);
+    const handleShippingSubmit = (data) => {
+        console.log('[Cart] Shipping Data submitted:', data);
+        setFormData(data); // Store form data for later submission
         setShowShippingForm(false);
         setIsReadyForCheckout(true);
+    };
+
+    const handleSubmitForm = () => {
+        // Logic to submit form data goes here
+        console.log('[Cart] Submitting form with data:', formData);
+        // Submit form data to your backend or desired endpoint
     };
 
     const handleCheckoutConfirmation = async () => {
@@ -41,7 +49,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
 
             try {
                 console.log('[Cart] Attempting to send transaction');
-                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
+                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems, handleSubmitForm);
                 console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
                 resetCart();
                 setShowShippingForm(true);
