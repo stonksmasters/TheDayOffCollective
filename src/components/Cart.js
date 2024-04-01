@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ShippingForm from './ShippingForm';
-import ReviewOrder from './ReviewOrder'; // Import the ReviewOrder component
+import ReviewOrder from './ReviewOrder';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { sendTransaction } from './solanaTransactions';
 
 const Cart = ({ items, removeFromCart, resetCart }) => {
     const [isCartMinimized, setIsCartMinimized] = useState(true);
     const [cartItems, setCartItems] = useState([]);
-    const [checkoutStage, setCheckoutStage] = useState('viewCart'); // Manage checkout stage
+    const [checkoutStage, setCheckoutStage] = useState('viewCart');
     const [formData, setFormData] = useState(null);
+    const [notification, setNotification] = useState('');
     const wallet = useWallet();
 
     useEffect(() => {
@@ -29,38 +30,40 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
 
     const handleShippingSubmit = (formData) => {
         setFormData(formData);
-        setCheckoutStage('reviewOrder'); // Move to review order stage
+        setCheckoutStage('reviewOrder');
     };
 
     const handleSubmitForm = async () => {
         console.log('[Cart] Submitting form with data:', formData);
-        // Submit the formData to your backend or another service
+        // Logic to submit the formData to your backend or another service
     };
 
     const handleCheckoutConfirmation = async () => {
         console.log('[Cart] Checkout confirmation initiated');
         if (wallet.connected && cartItems.length > 0) {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
-            console.log(`[Cart] Total checkout amount: ${totalAmount} SOL`);
-
             try {
-                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
+                setNotification('Processing your transaction...');
+                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems, 3);
                 console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
-                
+                setNotification('Transaction successful! Please check your wallet.');
                 await handleSubmitForm();
                 resetCart();
-                setCheckoutStage('viewCart'); // Reset to view cart stage after checkout
+                setCheckoutStage('viewCart');
             } catch (error) {
                 console.error('[Cart] Transaction failed:', error);
+                setNotification(`Transaction failed: ${error.message}. Please check your wallet or try again later.`);
             }
         } else {
             console.log('[Cart] Checkout attempted with no wallet connected or empty cart');
+            setNotification('Checkout attempted with no wallet connected or empty cart');
         }
     };
 
     const handleCancel = () => {
         resetCart();
-        setCheckoutStage('viewCart'); // Reset to view cart stage
+        setCheckoutStage('viewCart');
+        setNotification('');
     };
 
     const toggleCart = () => {
@@ -75,10 +78,11 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
             {!isCartMinimized && (
                 <>
                     <h2>Cart</h2>
+                    {notification && <div className="notification">{notification}</div>}
                     {cartItems.map(item => (
                         <div key={item.id} className="cart-item">
                             <p>{item.name}</p>
-                            <p>{item.price} Sol</p>
+                            <p>{item.price} SOL</p>
                             <p>Quantity: {item.quantity}</p>
                             <button onClick={() => removeFromCart(item.id)}>Remove</button>
                         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import './reviewOrder.css';
+
 
 const ReviewOrder = ({ items, onConfirm, onCancel, formData }) => {
     const totalAmount = items.reduce((acc, item) => acc + item.price, 0);
