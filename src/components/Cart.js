@@ -34,10 +34,27 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     };
 
     const handleSubmitForm = async () => {
+        if (!formData) {
+            console.error('Form data is not available');
+            return;
+        }
+    
         console.log('[Cart] Submitting form with data:', formData);
-        // Logic to submit the formData to your backend or another service
+    
+        // Fill the hidden form with the formData
+        const formElement = document.querySelector('form[name="shipping"]');
+        formData.forEach((value, key) => {
+            // Find the input in the hidden form and set its value
+            const input = formElement.querySelector(`[name="${key}"]`);
+            if (input) {
+                input.value = value;
+            }
+        });
+    
+        // Submit the hidden form
+        formElement.submit();
     };
-
+    
     const handleCheckoutConfirmation = async () => {
         console.log('[Cart] Checkout confirmation initiated');
         if (wallet.connected && cartItems.length > 0) {
