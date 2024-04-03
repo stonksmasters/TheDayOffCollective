@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {forwardRef } from 'react';
 
-const ShippingForm = ({ onFormSubmit }) => {
+
+
+const ShippingForm = forwardRef(({ onFormSubmit }, ref) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(event.target);
-        onFormSubmit(formData); // This will handle the React state transition
-
-        // Optionally, submit a hidden form to Netlify here or in the parent component
-    
+        onFormSubmit(formData);
     };
+
     return (
-        <form name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-            <input type="hidden" name="form-name" value="shipping" />
+        <form ref={ref} name="shipping" method="POST" data-netlify="true" onSubmit={handleSubmit}>
+        <input type="hidden" name="form-name" value="shipping" />
             <p>
                 <label>Name: <input type="text" name="name" required /></label>
             </p>
@@ -38,6 +38,6 @@ const ShippingForm = ({ onFormSubmit }) => {
             </p>
         </form>
     );
-};
+});
 
 export default ShippingForm;
