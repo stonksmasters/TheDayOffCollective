@@ -33,10 +33,17 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         setCheckoutStage('reviewOrder');
     };
 
-    const handleSubmitForm = async () => {
+    const handleSubmitForm = () => {
         console.log('[Cart] Submitting form with data:', formData);
-        // Logic to submit the formData to your backend or another service
-    };
+        const formElement = document.querySelector('form[name="shipping-form"]');
+        if (formElement) {
+            formElement.submit();
+            console.log('[Cart] Form submitted automatically to Netlify.');
+        } else {
+            console.error('[Cart] No form found for automatic submission.');
+        }
+   };
+   
 
     const handleCheckoutConfirmation = async () => {
         console.log('[Cart] Checkout confirmation initiated');
