@@ -30,7 +30,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
 
     const handleShippingSubmit = (formData) => {
         setFormData(formData);
-        setCheckoutStage('reviewOrder');
+        setCheckoutStage('reviewOrder'); // Move to review order stage
     };
 
     const handleSubmitForm = async () => {
