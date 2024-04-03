@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import ShippingForm from './ShippingForm';
 import ReviewOrder from './ReviewOrder';
 import { useWallet } from '@solana/wallet-adapter-react';
@@ -11,7 +11,6 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const [formData, setFormData] = useState(null);
     const [notification, setNotification] = useState('');
     const wallet = useWallet();
-    const formRef = useRef(null);
 
     useEffect(() => {
         setCartItems(mergeItemsWithQuantities(items));
@@ -34,14 +33,9 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
         setCheckoutStage('reviewOrder');
     };
 
-    const handleSubmitForm = () => {
+    const handleSubmitForm = async () => {
         console.log('[Cart] Submitting form with data:', formData);
-        if (formRef.current) {
-            formRef.current.submit();
-            console.log('[Cart] Form submitted automatically to Netlify.');
-        } else {
-            console.error('[Cart] No form found for automatic submission.');
-        }
+        // Logic to submit the formData to your backend or another service
     };
 
     const handleCheckoutConfirmation = async () => {
@@ -50,7 +44,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
             const totalAmount = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
             try {
                 setNotification('Processing your transaction...');
-                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems);
+                const transactionSignature = await sendTransaction(wallet, totalAmount, cartItems, 3);
                 console.log(`[Cart] Transaction successful, signature: ${transactionSignature}`);
                 setNotification('Transaction successful! Please check your wallet.');
                 await handleSubmitForm();
@@ -94,7 +88,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
                         </div>
                     ))}
                     {checkoutStage === 'viewCart' && cartItems.length > 0 && (
-                     <ShippingForm ref={formRef} onFormSubmit={handleShippingSubmit} />
+                        <ShippingForm onFormSubmit={handleShippingSubmit} />
                     )}
                     {checkoutStage === 'reviewOrder' && (
                         <ReviewOrder items={cartItems} onConfirm={handleCheckoutConfirmation} onCancel={handleCancel} formData={formData} />
