@@ -10,6 +10,7 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
     const [checkoutStage, setCheckoutStage] = useState('viewCart');
     const [formData, setFormData] = useState(null);
     const [notification, setNotification] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false); // Correctly define the state here
     const wallet = useWallet();
 
     useEffect(() => {
@@ -38,22 +39,28 @@ const Cart = ({ items, removeFromCart, resetCart }) => {
             console.error('Form data is not available');
             return;
         }
-    
+
         console.log('[Cart] Submitting form with data:', formData);
-    
-        // Fill the hidden form with the formData
-        const formElement = document.querySelector('form[name="shipping"]');
-        formData.forEach((value, key) => {
-            // Find the input in the hidden form and set its value
-            const input = formElement.querySelector(`[name="${key}"]`);
-            if (input) {
-                input.value = value;
-            }
+
+        const formObject = Object.fromEntries(formData.entries());
+
+        fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(formObject).toString(),
+        })
+        .then(() => {
+            setIsSubmitted(true); // Set submission status to true on success
+            console.log('[Cart] Form submission successful');
+            alert('Thank you for your submission. Your order has been submitted and your purchase is complete.');
+            resetCart();
+        })
+        .catch((error) => {
+            console.error('[Cart] Form submission failed:', error);
+            alert('There was a problem with your submission. Please try again.');
         });
-    
-        // Submit the hidden form
-        formElement.submit();
     };
+    
     
     const handleCheckoutConfirmation = async () => {
         console.log('[Cart] Checkout confirmation initiated');
