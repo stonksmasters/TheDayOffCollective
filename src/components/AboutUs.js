@@ -19,7 +19,8 @@ const AboutUs = () => {
                         <h3>NFT Collections and Comics</h3>
                         <p>A series of unique digital collectibles with rewards and community benefits.</p>
                         <ul>
-                            <li>Vol. 1 Genesis Degen Dragons</li>
+                            <li>Vol. 1 Dr. Degen’s Dragons
+</li>
                             <li>Vol. 2 ...</li>
                             <li>Vol. 3 ...</li>
                         </ul>

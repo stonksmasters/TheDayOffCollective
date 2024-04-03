@@ -8,7 +8,7 @@ import Videos from './components/Videos';
 import PromoDeals from './components/PromoDeals';
 import Marketplace from './components/Marketplace';
 import ComingSoon from './components/ComingSoon';
-import AboutUs from './components/AboutUs';
+import AboutUs from './components/AboutUs'; // Ensure AboutUs is imported
 import Footer from './components/Footer';
 import products from './data/products';
 import './App.css';
@@ -42,10 +42,11 @@ function App() {
                     <Route path="/" element={
                       <HomePage addToCart={addToCart} 
                        removeFromCart={removeFromCart} 
-                       resetCart={resetCart} // Ensure this prop is passed down
+                       resetCart={resetCart} 
                        cartItems={cartItems}
                      />} 
                     />
+                    <Route path="/about-us" element={<AboutUs />} />  // Add this line
                     <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
                     <Route path="/comics" element={<ComingSoon sectionTitle="Comics" />} />
                     <Route path="/recipes" element={<ComingSoon sectionTitle="Recipes" />} />
@@ -59,7 +60,6 @@ function App() {
 const HomePage = ({ addToCart, removeFromCart, resetCart, cartItems }) => (
     <div>
         <HeroSection />
-        <AboutUs />
         <ProductList products={featuredProducts} addToCart={addToCart} />
         <Videos />
         <PromoDeals />

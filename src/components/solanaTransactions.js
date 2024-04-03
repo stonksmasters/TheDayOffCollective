@@ -10,7 +10,7 @@ export const sendTransaction = async (wallet, amount, cartItems) => {
         const connectionInfo = await connection.getVersion();
         console.log(`[SolanaTransactions] Connected to Syndica RPC. Version: ${connectionInfo['solana-core']}`);
 
-        const receiverAddress = new PublicKey('dovP29ni96gmfecU6YmiZhY84pvh4HMr2ADuxL4mkUu');
+        const receiverAddress = new PublicKey('6Zt2LncArHxW966f9HumVqFiCQE1hPxSCoxPDHekEfog');
         console.log(`[SolanaTransactions] Receiver address: ${receiverAddress.toString()}`);
 
         const lamports = amount * LAMPORTS_PER_SOL;
