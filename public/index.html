@@ -15,7 +15,7 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     
-    <!-- Hidden form for Netlify -->
+    <!-- Hidden form for Netlify: Shipping Form -->
     <form name="shipping" netlify hidden>
         <input type="text" name="name" />
         <input type="email" name="email" />
@@ -25,6 +25,14 @@
         <input type="text" name="state" />
         <input type="text" name="zipcode" />
         <button type="submit">Submit</button>
+    </form>
+
+    <!-- Hidden form for Netlify: Gaming Team Application -->
+    <form name="apply-now" netlify hidden>
+        <input type="text" name="name" required />
+        <input type="email" name="email" required />
+        <textarea name="experience" required></textarea>
+        <button type="submit">Submit Application</button>
     </form>
 </body>
 </html>

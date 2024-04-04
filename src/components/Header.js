@@ -17,6 +17,7 @@ const Header = ({ cartItems, removeFromCart, resetCart }) => { // Include resetC
                 <nav className="nav-links">
                     <Link to="/">Home</Link>
                     <Link to="/marketplace">Marketplace</Link>
+                    <Link to="/gaming-team">Gaming Team</Link>
                     <Link to="/about-us">NFT Collection</Link>  {/* Add this line */}
                     <Link to="/comics">Comics</Link>
                     <Link to="/recipes">Recipes</Link>

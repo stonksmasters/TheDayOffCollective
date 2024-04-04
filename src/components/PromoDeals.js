@@ -5,6 +5,7 @@ import "../App.css"; // Assuming your styles are here
 const promoImages = [
   '/images/deal2.jpg',
   '/images/deal.png',
+  '/images/Promo2.png'
 
   // Add more images as needed
 ];
@@ -23,11 +24,11 @@ const PromoDeals = () => {
   return (
     <div className="promo-deals-section" style={{ backgroundImage: `url(${promoImages[currentImageIndex]})` }}>
       <div className="promo-deals-content">
-        <h2>Exclusive Promo Deals</h2>
-        <p>Discover our special offers and exclusive deals tailored just for you!</p>
+        <h2>Brought to you by Brawndo</h2>
       </div>
     </div>
   );
 };
+
 
 export default PromoDeals;

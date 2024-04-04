@@ -10,6 +10,8 @@ import Marketplace from './components/Marketplace';
 import ComingSoon from './components/ComingSoon';
 import AboutUs from './components/AboutUs'; // Ensure AboutUs is imported
 import Footer from './components/Footer';
+import GamingTeam from './components/GamingTeam'; // Import the new component at the top
+
 import products from './data/products';
 import './App.css';
 
@@ -46,8 +48,9 @@ function App() {
                        cartItems={cartItems}
                      />} 
                     />
-                    <Route path="/about-us" element={<AboutUs />} />  // Add this line
+                    <Route path="/about-us" element={<AboutUs />} />  
                     <Route path="/marketplace" element={<Marketplace addToCart={addToCart} />} />
+                    <Route path="/gaming-team" element={<GamingTeam />} />
                     <Route path="/comics" element={<ComingSoon sectionTitle="Comics" />} />
                     <Route path="/recipes" element={<ComingSoon sectionTitle="Recipes" />} />
                 </Routes>
