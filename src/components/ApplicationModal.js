@@ -1,12 +1,15 @@
-// src/components/ApplicationModal.js
 import React from 'react';
 
 const ApplicationModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        // You might want to handle form submission here or leave it to Netlify
+        // Don't prevent default to allow Netlify to capture the form submission
+        const formData = new FormData(e.target);
+
+        // If you need to handle the form data in React, do it here
+        // Otherwise, this can be removed if Netlify is handling everything
+        console.log('Form data:', formData);
     };
 
     return (
