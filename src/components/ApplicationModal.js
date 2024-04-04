@@ -17,8 +17,8 @@ const ApplicationModal = ({ isOpen, onClose }) => {
             <div className="modal-content">
                 <button className="close-button" onClick={onClose}>×</button>
                 <h2>Join Our Gaming Team</h2>
-                <form name="apply-now" method="POST" data-netlify="true" onSubmit={handleSubmit}>
-                    <input type="hidden" name="form-name" value="apply-now" />
+                <form name="apply-now" method="POST" data-netlify="true" onSubmit={handleSubmit} action="/">
+    <input type="hidden" name="form-name" value="apply-now" />
                     <label>
                         Name:
                         <input type="text" name="name" required />
